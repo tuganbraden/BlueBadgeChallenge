@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Data
 {
-    class Lifestyle
+    public class Lifestyle
     {
         [Key]
         public int LifestyleId { get; set; }
