@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Diets.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Lifestyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
