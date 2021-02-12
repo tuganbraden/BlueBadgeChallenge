@@ -26,7 +26,7 @@ namespace BlueBadgeProject.Data
         {
         }
 
-        public DbSet<Lifestyle> Lifestyles { get; set; }
+        public DbSet<WorkoutPlan> WorkoutPlan { get; set; }
 
         public static ApplicationDbContext Create()
         {
