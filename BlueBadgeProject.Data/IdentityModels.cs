@@ -76,7 +76,9 @@ namespace BlueBadgeProject.Data
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
+        public DbSet<WorkoutPlan> WorkoutPlan { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
