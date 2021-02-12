@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -49,7 +50,9 @@ namespace BlueBadgeProject.Data
         public bool IsLactoseFree{ get; set; } = false;
         [Required]
         public bool IsGlutenFree { get; set; } = false;
-
+        [ForeignKey(nameof(Diets))]
+        public int DietId { get; set; }
+        public virtual Diets Diets { get; set; }
 
     }
 }
