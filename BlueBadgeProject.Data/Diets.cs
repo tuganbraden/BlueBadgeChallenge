@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Data
 {
-    class Diets
+    public class Diets
     {
         [Key]
         public int DietID { get; set; }
