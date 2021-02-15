@@ -10,6 +10,11 @@ namespace BlueBadgeProject.Services
 {
     public class ClientService
     {
+        private readonly string _userId;
+        public ClientService(string userId)
+        {
+            _userId = userId;
+        }
         public bool CreateClient(ClientCreate model)
         {
             var entity = new Client()
@@ -51,9 +56,66 @@ namespace BlueBadgeProject.Services
                 return query.ToArray();
             }
         }
-        public ClientDetail GetClientById(int id)
+        public ClientDetail GetClientById(string id)
         {
-
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Clients.Single(e => e.ClientId == id);
+                return
+                    new ClientDetail
+                    {
+                        ClientId = entity.ClientId,
+                        FullName = entity.FullName,
+                        CreatedUtc = entity.CreatedUtc,
+                        Height = entity.Height,
+                        Weight = entity.Weight,
+                        GoalDate = entity.GoalDate,
+                        GoalWeight = entity.GoalWeight,
+                        SubscriberStatus = entity.SubscriberStatus,
+                        WeeklyCaloricNeed = entity.WeeklyCaloricNeed,
+                        BodyType = entity.BodyType,
+                        LifeStyleType = entity.LifeStyleType,
+                        IsVegetarian = entity.IsVegetarian,
+                        IsKeto = entity.IsKeto,
+                        IsLactoseFree = entity.IsLactoseFree,
+                        IsGlutenFree = entity.IsGlutenFree,
+                        DietId = entity.DietId
+                    };
+            }
         }
+        public bool UpdateClient(ClientEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Clients.Single(e => e.ClientId == model.ClientId);
+                entity.FullName = model.FullName;
+                entity.Height = model.Height;
+                entity.Weight = model.Weight;
+                entity.GoalWeight = model.GoalWeight;
+                entity.GoalDate = model.GoalDate;
+                entity.SubscriberStatus = model.SubscriberStatus;
+                entity.WeeklyCaloricNeed = model.WeeklyCaloricNeed;
+                entity.BodyType = model.BodyType;
+                entity.LifeStyleType = model.LifeStyleType;
+                entity.IsVegetarian = model.IsVegetarian;
+                entity.IsKeto = model.IsKeto;
+                entity.IsLactoseFree = model.IsLactoseFree;
+                entity.IsGlutenFree = model.IsGlutenFree;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                return ctx.SaveChanges() >= 1;
+
+            }
+        }
+        public bool DeleteClient(string clientId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Clients.Single(e => e.ClientId == clientId);
+                ctx.Clients.Remove(entity);
+                return ctx.SaveChanges() >= 1;
+            }
+        }
+
     }
 }

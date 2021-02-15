@@ -25,6 +25,7 @@ namespace BlueBadgeProject.Data
         public string FullName { get; set; }
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset ModifiedUtc { get; set; }
         [Required]
 
         public double Height { get; set; }

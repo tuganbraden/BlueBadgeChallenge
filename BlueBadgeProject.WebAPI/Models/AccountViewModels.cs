@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BlueBadgeProject.WebAPI.Models
 {
-    // Models returned by AccountController actions.
+    // Models returned by ClientController actions.
 
     public class ExternalLoginViewModel
     {

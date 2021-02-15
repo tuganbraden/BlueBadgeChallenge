@@ -8,41 +8,41 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Models
 {
-    public class ClientCreate
+    public class ClientDetail
     {
+        public string ClientId { get; set; }
+      
 
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-        [Required]
         public string FullName { get; set; }
+  
+        public DateTimeOffset CreatedUtc { get; set; }
+      
+
         public double Height { get; set; }
+
+     
         public double Weight { get; set; }
+       
         public double GoalWeight { get; set; }
-        public SubscriberStatus SubscriberStatus { get; set; }
+     
+        public DateTime GoalDate { get; set; }
+     
+        public SubscriberStatus SubscriberStatus { get; set; } = 0;
+     
         public double WeeklyCaloricNeed { get; set; }
         public BodyType BodyType { get; set; }
-       
+     
         public LifeStyleType LifeStyleType { get; set; }
-        
+       
         public bool IsVegetarian { get; set; } = false;
         
         public bool IsKeto { get; set; } = false;
-        
+       
         public bool IsLactoseFree { get; set; } = false;
+      
         public bool IsGlutenFree { get; set; } = false;
-        public DateTime GoalDate { get; set; }
-        public int DietId { get; set; }
+        
+        public int DietId { get; set; }// might change to Diets name
+        
     }
 }

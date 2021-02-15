@@ -17,21 +17,23 @@ using BlueBadgeProject.WebAPI.Models;
 using BlueBadgeProject.WebAPI.Providers;
 using BlueBadgeProject.WebAPI.Results;
 using BlueBadgeProject.Data;
+using BlueBadgeProject.Models;
+using BlueBadgeProject.Services;
 
 namespace BlueBadgeProject.WebAPI.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
-    public class AccountController : ApiController
+    [RoutePrefix("api/Client")]
+    public class ClientController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public ClientController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
+        public ClientController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
@@ -322,14 +324,15 @@ namespace BlueBadgeProject.WebAPI.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(ClientCreate model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new Client() { UserName = model.Email, Email = model.Email };
+            var service = CreateClientService();
+            if(!service.CreateClient)
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -488,6 +491,12 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }
+        }
+        private ClientService CreateClientService()
+        {
+            var userId = User.Identity.GetUserId();
+            var clientService = new ClientService(userId);
+            return clientService;
         }
 
         #endregion
