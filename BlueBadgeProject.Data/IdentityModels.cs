@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+using System.Data.Entity;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -31,6 +34,7 @@ namespace BlueBadgeProject.Data
             return new ApplicationDbContext();
         }
         public DbSet<WorkoutPlan> WorkoutPlan { get; set; }
+        public DbSet<Diets> Diets { get; set; }
         public DbSet<Client> Clients { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
