@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using BlueBadgeProject.WebAPI.Models;
 using BlueBadgeProject.WebAPI.Providers;
 using BlueBadgeProject.WebAPI.Results;
+using BlueBadgeProject.Data;
 
 namespace BlueBadgeProject.WebAPI.Controllers
 {
@@ -250,7 +251,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            Client user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
@@ -328,7 +329,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new Client() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -357,7 +358,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new Client() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)

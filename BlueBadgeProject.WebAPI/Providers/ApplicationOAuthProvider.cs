@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using BlueBadgeProject.WebAPI.Models;
+using BlueBadgeProject.Data;
 
 namespace BlueBadgeProject.WebAPI.Providers
 {
@@ -31,7 +32,7 @@ namespace BlueBadgeProject.WebAPI.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            Client user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
