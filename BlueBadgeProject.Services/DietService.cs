@@ -9,8 +9,6 @@ using static BlueBadgeProject.Models.DietModels;
 
 public class DietService
 {
-
-
     public bool CreateDiet(Diet model)
     {
         var entity =
