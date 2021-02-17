@@ -10,7 +10,7 @@ namespace BlueBadgeProject.Data
     public class Diets
     {
         [Key]
-        public int DietID { get; set; }
+        public int DietId { get; set; }
         public string Name { get; set; }
         public bool IsVegetarian { get; set; }
         public bool IsKeto { get; set; }
