@@ -16,11 +16,15 @@ namespace BlueBadgeProject.Data
     {
         [Key]
         public int PlanId { get; set; }
-        public string PlanName { get; set; }
-        public WorkoutType ProgramType { get; set; }
         [ForeignKey(nameof(Client))]
         public int CreatedBy { get; set; }
         public virtual Client Client { get; set; }
-        public double intensity { get; set; }
+        [Required]
+        public string PlanName { get; set; }
+        [Required]
+        [Range(0, 10)]
+        public double Intensity { get; set; }
+        [Required]
+        public WorkoutType ProgramType { get; set; }
     }
 }
