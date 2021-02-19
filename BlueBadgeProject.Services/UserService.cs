@@ -1,5 +1,6 @@
 ﻿using BlueBadgeProject.Data;
 using BlueBadgeProject.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +9,32 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Services
 {
-    public class ClientService
+    public class UserService
     {
         private readonly string _userId;
-        public ClientService(string userId)
+        private UserManager _userManager;
+        public UserManager UserManager
         {
+            get
+            {
+                return _userManager;
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        public UserService(string userId, UserManager userManager)
+        {
+            _userManager = userManager;
             _userId = userId;
         }
-        public bool CreateClient(ClientCreate model)
+        public async Task<bool> CreateUser(UserCreate model)
         {
-            var entity = new Client()
+            var entity = new User()
             {
+                UserName = model.Email,
+                Email = model.Email,
                 FullName = model.FullName,
                 Height = model.Height,
                 Weight = model.Weight,
@@ -34,21 +50,19 @@ namespace BlueBadgeProject.Services
                 IsGlutenFree = model.IsGlutenFree,
                 CreatedUtc = DateTimeOffset.Now
             };
-            using (var ctx = new ApplicationDbContext())
-            {
-                ctx.Clients.Add(entity);
-                return ctx.SaveChanges() >= 1;
-            }
+            IdentityResult result = await UserManager.CreateAsync(entity, model.Password);
+
+            return result.Succeeded;
         }
-        public IEnumerable<ClientListItem> GetClients()
+        public IEnumerable<UserListItem> GetUsers()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
-                    ctx.Clients.Select(
-                       e => new ClientListItem
+                    ctx.Users.Select(
+                       e => new UserListItem
                        {
-                           ClientId = e.ClientId,
+                           UserId = e.UserId,
                            FullName = e.FullName,
                            SubscriberStatus = e.SubscriberStatus,
                            CreatedUtc = e.CreatedUtc
@@ -56,15 +70,15 @@ namespace BlueBadgeProject.Services
                 return query.ToArray();
             }
         }
-        public ClientDetail GetClientById(string id)
+        public UserDetail GetUserById(string id)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Clients.Single(e => e.ClientId == id);
+                var entity = ctx.Users.Single(e => e.UserId == id);
                 return
-                    new ClientDetail
+                    new UserDetail
                     {
-                        ClientId = entity.ClientId,
+                        UserId = entity.UserId,
                         FullName = entity.FullName,
                         CreatedUtc = entity.CreatedUtc,
                         Height = entity.Height,
@@ -83,12 +97,12 @@ namespace BlueBadgeProject.Services
                     };
             }
         }
-        public bool UpdateClient(ClientEdit model)
+        public bool UpdateUser(UserEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
-                    ctx.Clients.Single(e => e.ClientId == model.ClientId);
+                    ctx.Users.Single(e => e.UserId == model.UserId);
                 entity.FullName = model.FullName;
                 entity.Height = model.Height;
                 entity.Weight = model.Weight;
@@ -107,12 +121,12 @@ namespace BlueBadgeProject.Services
 
             }
         }
-        public bool DeleteClient(string clientId)
+        public bool DeleteUser(string userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Clients.Single(e => e.ClientId == clientId);
-                ctx.Clients.Remove(entity);
+                var entity = ctx.Users.Single(e => e.UserId == userId);
+                ctx.Users.Remove(entity);
                 return ctx.SaveChanges() >= 1;
             }
         }

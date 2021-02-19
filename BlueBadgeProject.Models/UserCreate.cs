@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Models
 {
-    public class ClientCreate
+    public class UserCreate
     {
 
         [Required]

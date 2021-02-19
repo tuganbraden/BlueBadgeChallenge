@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using BlueBadgeProject.WebAPI.Models;
+
 using BlueBadgeProject.WebAPI.Providers;
 using BlueBadgeProject.WebAPI.Results;
 using BlueBadgeProject.Data;
@@ -23,28 +23,28 @@ using BlueBadgeProject.Services;
 namespace BlueBadgeProject.WebAPI.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Client")]
-    public class ClientController : ApiController
+    [RoutePrefix("api/User")]
+    public class UserController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
+        private UserManager _userManager;
 
-        public ClientController()
+        public UserController()
         {
         }
 
-        public ClientController(ApplicationUserManager userManager,
+        public UserController(UserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
+        public UserManager UserManager
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? Request.GetOwinContext().GetUserManager<UserManager>();
             }
             private set
             {
@@ -61,7 +61,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-            return new UserInfoViewModel
+            return new BlueBadgeProject.Models.UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
@@ -253,7 +253,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            Client user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            User user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
@@ -324,22 +324,20 @@ namespace BlueBadgeProject.WebAPI.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(ClientCreate model)
+        public async Task<IHttpActionResult> Register(UserCreate model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var service = CreateClientService();
-            if(!service.CreateClient)
+            var service = CreateUserService();
+            if (!service.CreateUser(model).Result)
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
+
+                return InternalServerError();
+           
 
             return Ok();
         }
@@ -361,7 +359,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return InternalServerError();
             }
 
-            var user = new Client() { UserName = model.Email, Email = model.Email };
+            var user = new User() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -492,10 +490,11 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return HttpServerUtility.UrlTokenEncode(data);
             }
         }
-        private ClientService CreateClientService()
+        private UserService CreateUserService()
         {
             var userId = User.Identity.GetUserId();
-            var clientService = new ClientService(userId);
+            UserManager userManager =  Request.GetOwinContext().GetUserManager<UserManager>();
+            var clientService = new UserService(userId,userManager);
             return clientService;
         }
 

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Models
 {
-    public class ClientListItem
+    public class UserListItem
     {
-        public string ClientId { get; set; }
+        public string UserId { get; set; }
         public string FullName { get; set; }
         public SubscriberStatus SubscriberStatus { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
