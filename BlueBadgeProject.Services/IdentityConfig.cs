@@ -3,25 +3,25 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using BlueBadgeProject.WebAPI.Models;
+using BlueBadgeProject.Models;
 using BlueBadgeProject.Data;
 
-namespace BlueBadgeProject.WebAPI
+namespace BlueBadgeProject.Services
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
-    public class ApplicationUserManager : UserManager<Client>
+    public class UserManager : Microsoft.AspNet.Identity.UserManager<User>
     {
-        public ApplicationUserManager(IUserStore<Client> store)
+        public UserManager(IUserStore<User> store)
             : base(store)
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<Client>(context.Get<ApplicationDbContext>()));
+            var manager = new UserManager(new UserStore<User>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<Client>(manager)
+            manager.UserValidator = new UserValidator<User>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -38,7 +38,7 @@ namespace BlueBadgeProject.WebAPI
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<Client>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }

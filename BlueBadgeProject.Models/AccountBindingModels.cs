@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace BlueBadgeProject.Models
 {
-    // Models used as parameters to ClientController actions.
+    // Models used as parameters to UserController actions.
 
     public class AddExternalLoginBindingModel
     {

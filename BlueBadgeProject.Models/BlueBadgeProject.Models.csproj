@@ -61,10 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountBindingModels.cs" />
-    <Compile Include="ClientCreate.cs" />
-    <Compile Include="ClientDetail.cs" />
-    <Compile Include="ClientEdit.cs" />
-    <Compile Include="ClientListItem.cs" />
+    <Compile Include="AccountViewModels.cs" />
+    <Compile Include="UserCreate.cs" />
+    <Compile Include="UserDetail.cs" />
+    <Compile Include="UserEdit.cs" />
+    <Compile Include="UserListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

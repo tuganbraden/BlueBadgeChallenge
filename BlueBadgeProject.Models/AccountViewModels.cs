@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlueBadgeProject.WebAPI.Models
+namespace BlueBadgeProject.Models
 {
-    // Models returned by ClientController actions.
+    // Models returned by UserController actions.
 
     public class ExternalLoginViewModel
     {

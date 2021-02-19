@@ -18,9 +18,9 @@ namespace BlueBadgeProject.Data
         public int PlanId { get; set; }
         public string PlanName { get; set; }
         public WorkoutType ProgramType { get; set; }
-        [ForeignKey(nameof(Client))]
+        [ForeignKey(nameof(User))]
         public int CreatedBy { get; set; }
-        public virtual Client Client { get; set; }
+        public virtual User User { get; set; }
         public double intensity { get; set; }
     }
 }

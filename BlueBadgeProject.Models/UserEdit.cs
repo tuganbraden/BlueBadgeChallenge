@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Models
 {
-    public class ClientEdit
+    public class UserEdit
     {
-        public string ClientId { get; set; }
+        public string UserId { get; set; }
         public string FullName { get; set; }
         public double Height { get; set; }
 
