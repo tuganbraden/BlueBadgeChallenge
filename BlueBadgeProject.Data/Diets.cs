@@ -10,13 +10,20 @@ namespace BlueBadgeProject.Data
     public class Diets
     {
         [Key]
-        public int DietID { get; set; }
+        public int DietId { get; set; }
+        [Required]
         public string Name { get; set; }
-        public bool IsVegetarian { get; set; }
-        public bool IsKeto { get; set; }
-        public bool IsLactoseFree { get; set; }
-        public bool IsGlutenFree { get; set; }
+        [Required]
+        public bool IsVegetarian { get; set; } = false;
+        [Required]
+        public bool IsKeto { get; set; } = false;
+        [Required]
+        public bool IsLactoseFree { get; set; } = false;
+        [Required]
+        public bool IsGlutenFree { get; set; } = false;
+        [Required]
         public string Description { get; set; }
+        [Required]
         public double CaloriesPerDay { get; set; }
     }
 }
