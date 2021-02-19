@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace BlueBadgeProject.Models
 {

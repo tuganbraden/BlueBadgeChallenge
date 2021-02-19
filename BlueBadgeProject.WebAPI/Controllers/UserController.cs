@@ -33,10 +33,10 @@ namespace BlueBadgeProject.WebAPI.Controllers
         {
         }
 
-        public UserController(UserManager userManager,
+        public UserController(
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            UserManager = userManager;
+            
             AccessTokenFormat = accessTokenFormat;
         }
 
@@ -44,7 +44,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<UserManager>();
+                return CreateUserService().UserManager;
             }
             private set
             {
