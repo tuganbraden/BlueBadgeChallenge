@@ -39,7 +39,7 @@ public class DietService
                 .Diets
                 .Select(e =>
                     new Diets
-                    {
+                    {                        
                         Name = e.Name,
                         IsVegetarian = e.IsVegetarian,
                         IsKeto = e.IsKeto,
@@ -47,8 +47,9 @@ public class DietService
                         IsGlutenFree = e.IsGlutenFree,
                         Description = e.Description,
                         CaloriesPerDay = e.CaloriesPerDay
+
                     }
-                    );
+                    ) ;
             return query.ToList();
         }
     }
