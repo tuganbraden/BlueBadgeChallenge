@@ -60,8 +60,8 @@ public class DietService
         {
             var myclient =
                 ctx
-                .Clients
-                .Single(e => e.ClientId == ClientId);
+                .Users
+                .Single(e => e.UserId == ClientId);
 
             var DietId = myclient.DietId;
 

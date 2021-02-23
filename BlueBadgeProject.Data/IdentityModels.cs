@@ -23,7 +23,7 @@ namespace BlueBadgeProject.Data
         Free, Premium, GoldTier
     }
 
-    public class ApplicationDbContext : IdentityDbContext<Client>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -33,9 +33,11 @@ namespace BlueBadgeProject.Data
         {
             return new ApplicationDbContext();
         }
-        public DbSet<WorkoutPlan> WorkoutPlan { get; set; }
+        
+        public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Diets> Diets { get; set; }
-        public DbSet<Client> Clients { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder

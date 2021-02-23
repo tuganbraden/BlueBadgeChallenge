@@ -9,8 +9,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using BlueBadgeProject.WebAPI.Models;
+
 using BlueBadgeProject.Data;
+using BlueBadgeProject.Services;
 
 namespace BlueBadgeProject.WebAPI.Providers
 {
@@ -30,9 +31,9 @@ namespace BlueBadgeProject.WebAPI.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userManager = context.OwinContext.GetUserManager<UserManager>();
 
-            Client user = await userManager.FindAsync(context.UserName, context.Password);
+            User user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
