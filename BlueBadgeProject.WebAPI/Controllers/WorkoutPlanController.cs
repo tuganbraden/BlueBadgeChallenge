@@ -26,7 +26,12 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok(workoutPlans);
         }
 
-
+        public IHttpActionResult Get(int id)
+        {
+            WorkoutPlanService workoutPlanService = CreateWorkoutPlanService();
+            var workoutPlan = workoutPlanService.GetPlanById(id);
+            return Ok(workoutPlan);
+        }
 
         public IHttpActionResult Post(WorkoutPlanCreate workoutPlan)
         {
@@ -41,5 +46,28 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok();
         }
 
+        public IHttpActionResult Put(WorkoutPlanEdit plan)
+        {
+            if(ModelState.IsValid)
+            {
+                var service = CreateWorkoutPlanService();
+
+                if (service.UpdatePlan(plan))
+                    return Ok();
+
+                return InternalServerError();
+            }
+            return BadRequest(ModelState);
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateWorkoutPlanService();
+
+            if (service.DeletePlan(id))
+                return Ok();
+
+            return InternalServerError();
+        }
     }
 }
