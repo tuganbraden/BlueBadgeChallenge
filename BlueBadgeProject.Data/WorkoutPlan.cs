@@ -17,7 +17,7 @@ namespace BlueBadgeProject.Data
         [Key]
         public int PlanId { get; set; }
         [ForeignKey(nameof(User))]
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public virtual User User { get; set; }
         [Required]
         public string PlanName { get; set; }
