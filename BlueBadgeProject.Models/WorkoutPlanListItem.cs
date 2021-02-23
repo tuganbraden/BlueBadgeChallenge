@@ -9,7 +9,7 @@ namespace BlueBadgeProject.Models
 {
     public class WorkoutPlanListItem
     {
-        public int WorkoutPlanId { get; set; }
+        public int PlanId { get; set; }
         public string PlanName { get; set; }
     }
 }

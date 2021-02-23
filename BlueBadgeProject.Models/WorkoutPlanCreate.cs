@@ -8,6 +8,11 @@ using BlueBadgeProject.Data;
 
 namespace BlueBadgeProject.Models
 {
+    public enum WorkoutType
+    {
+        Cardio, Strength, Flexibility
+    }
+
     public class WorkoutPlanCreate
     {
         [Required]

@@ -11,7 +11,7 @@ namespace BlueBadgeProject.Models
     public class WorkoutPlanEdit
     {
         [Required]
-        public int WorkoutPlanId { get; set; }
+        public int PlanId { get; set; }
         public string PlanName { get; set; }
         public double Intensity { get; set; }
         public WorkoutType ProgramType { get; set; }
