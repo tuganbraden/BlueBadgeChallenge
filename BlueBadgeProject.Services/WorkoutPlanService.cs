@@ -22,7 +22,7 @@ namespace BlueBadgeProject.Services
             var entity =
                 new WorkoutPlan
                 {
-                    CreatedBy = _userId,
+                    CreatedBy = _userId.ToString(),
                     PlanName = model.PlanName,
                     Intensity = model.Intensity,
                     ProgramType = (Data.WorkoutType)model.ProgramType
@@ -42,7 +42,7 @@ namespace BlueBadgeProject.Services
                 var query =
                     ctx
                         .WorkoutPlans
-                        .Where(e => e.CreatedBy == _userId)
+                        .Where(e => e.CreatedBy == _userId.ToString())
                         .Select(
                             e =>
                                 new WorkoutPlanListItem
@@ -62,7 +62,7 @@ namespace BlueBadgeProject.Services
                 var entity =
                     ctx
                         .WorkoutPlans
-                        .Single(e => e.PlanId == Id && e.CreatedBy == _userId);
+                        .Single(e => e.PlanId == Id && e.CreatedBy == _userId.ToString());
                 return 
                     new WorkoutPlanDetail
                     {
@@ -81,7 +81,7 @@ namespace BlueBadgeProject.Services
                 var entity =
                     ctx
                         .WorkoutPlans
-                        .Single(e => e.PlanId == model.PlanId && e.CreatedBy == _userId);
+                        .Single(e => e.PlanId == model.PlanId && e.CreatedBy == _userId.ToString());
 
                 entity.PlanName = model.PlanName;
                 entity.Intensity = model.Intensity;
@@ -98,7 +98,7 @@ namespace BlueBadgeProject.Services
                 var entity =
                     ctx
                         .WorkoutPlans
-                        .Single(e => e.PlanId == planId && e.CreatedBy == _userId);
+                        .Single(e => e.PlanId == planId && e.CreatedBy == _userId.ToString());
 
                 ctx.WorkoutPlans.Remove(entity);
 
