@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="DietService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkoutPlanService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlueBadgeProject.Data\BlueBadgeProject.Data.csproj">

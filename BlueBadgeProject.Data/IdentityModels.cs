@@ -33,7 +33,7 @@ namespace BlueBadgeProject.Data
         {
             return new ApplicationDbContext();
         }
-        public DbSet<WorkoutPlan> WorkoutPlan { get; set; }
+        public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public DbSet<Diets> Diets { get; set; }
         public DbSet<Client> Clients { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
