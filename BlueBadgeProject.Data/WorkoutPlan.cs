@@ -16,9 +16,9 @@ namespace BlueBadgeProject.Data
     {
         [Key]
         public int PlanId { get; set; }
-        [ForeignKey(nameof(Client))]
-        public Guid CreatedBy { get; set; }
-        public virtual Client Client { get; set; }
+        [ForeignKey(nameof(User))]
+        public int CreatedBy { get; set; }
+        public virtual User User { get; set; }
         [Required]
         public string PlanName { get; set; }
         [Required]
