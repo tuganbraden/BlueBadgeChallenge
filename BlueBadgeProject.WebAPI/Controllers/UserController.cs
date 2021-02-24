@@ -332,7 +332,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
 
             var service = CreateUserService();
-            if (!service.CreateUser(model).Result)
+            if (!await service.CreateUser(model))
 
 
 
