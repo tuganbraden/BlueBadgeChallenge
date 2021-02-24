@@ -62,7 +62,7 @@ namespace BlueBadgeProject.Services
                     ctx.Users.Select(
                        e => new UserListItem
                        {
-                           UserId = e.UserId,
+                           UserName = e.UserName,
                            FullName = e.FullName,
                            SubscriberStatus = e.SubscriberStatus,
                            CreatedUtc = e.CreatedUtc

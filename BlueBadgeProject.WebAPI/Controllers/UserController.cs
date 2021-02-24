@@ -341,7 +341,13 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             return Ok();
         }
-
+        [HttpGet]
+        [Route("GetAll")]
+        public IHttpActionResult GetAll()
+        {
+            var service = CreateUserService();
+            return Ok(service.GetUsers());
+        }
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

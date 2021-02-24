@@ -9,7 +9,7 @@ namespace BlueBadgeProject.Models
 {
     public class UserListItem
     {
-        public string UserId { get; set; }
+        public string UserName { get; set; }
         public string FullName { get; set; }
         public SubscriberStatus SubscriberStatus { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
