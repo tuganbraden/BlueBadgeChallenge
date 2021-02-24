@@ -95,6 +95,10 @@
     <Compile Include="Migrations\202102240007070_NullableDiet.designer.cs">
       <DependentUpon>202102240007070_NullableDiet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102240100223_ChangedUserId.cs" />
+    <Compile Include="Migrations\202102240100223_ChangedUserId.designer.cs">
+      <DependentUpon>202102240100223_ChangedUserId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Diets.cs" />
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102240007070_NullableDiet.resx">
       <DependentUpon>202102240007070_NullableDiet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102240100223_ChangedUserId.resx">
+      <DependentUpon>202102240100223_ChangedUserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
