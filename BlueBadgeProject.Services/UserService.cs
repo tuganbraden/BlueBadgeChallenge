@@ -74,11 +74,11 @@ namespace BlueBadgeProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Users.Single(e => e.UserId == id);
+                var entity = ctx.Users.Single(e => e.Id == id);
                 return
                     new UserDetail
                     {
-                        UserId = entity.UserId,
+                        UserId = entity.Id,
                         FullName = entity.FullName,
                         CreatedUtc = entity.CreatedUtc,
                         Height = entity.Height,
@@ -102,7 +102,7 @@ namespace BlueBadgeProject.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
-                    ctx.Users.Single(e => e.UserId == model.UserId);
+                    ctx.Users.Single(e => e.Id == model.UserId);
                 entity.FullName = model.FullName;
                 entity.Height = model.Height;
                 entity.Weight = model.Weight;
@@ -125,7 +125,7 @@ namespace BlueBadgeProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Users.Single(e => e.UserId == userId);
+                var entity = ctx.Users.Single(e => e.Id == userId);
                 ctx.Users.Remove(entity);
                 return ctx.SaveChanges() >= 1;
             }

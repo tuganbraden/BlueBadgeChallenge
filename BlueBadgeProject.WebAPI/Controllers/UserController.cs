@@ -33,12 +33,6 @@ namespace BlueBadgeProject.WebAPI.Controllers
         {
         }
 
-        public UserController(
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
-        {
-            
-            AccessTokenFormat = accessTokenFormat;
-        }
 
         public UserManager UserManager
         {
@@ -50,6 +44,90 @@ namespace BlueBadgeProject.WebAPI.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> Register(UserCreate model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateUserService();
+            if (!await service.CreateUser(model))
+
+
+
+                return InternalServerError();
+           
+
+            return Ok();
+        }
+        [HttpGet]
+        [Route("GetAll")]
+        public IHttpActionResult GetAll()
+        {
+            var service = CreateUserService();
+            return Ok(service.GetUsers());
+        }
+        [HttpGet]
+        [Route("GetUserInfo")]
+        public IHttpActionResult GetUserInfo(string userId)
+        {
+            var service = CreateUserService();
+            try
+            {
+                return Ok(service.GetUserById(userId));
+            }catch(Exception e)
+            {
+                return InternalServerError();
+            }
+
+        }
+        [HttpPut]
+        [Route("Edit")]
+        public IHttpActionResult EditUser([FromBody]UserEdit model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var service = CreateUserService();
+            try
+            {
+                if(!service.UpdateUser(model))
+                    return InternalServerError();
+                return Ok();
+            }catch(Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteUserById")]
+        public IHttpActionResult DeleteUser([FromBody]string userId)
+        {
+            var service = CreateUserService();
+            try
+            {
+                if (!service.DeleteUser(userId))
+                    return InternalServerError();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+        #region BuiltInEndpoints
+        public UserController(
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        {
+            
+            AccessTokenFormat = accessTokenFormat;
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -320,34 +398,6 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             return logins;
         }
-
-        // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(UserCreate model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var service = CreateUserService();
-            if (!await service.CreateUser(model))
-
-
-
-                return InternalServerError();
-           
-
-            return Ok();
-        }
-        [HttpGet]
-        [Route("GetAll")]
-        public IHttpActionResult GetAll()
-        {
-            var service = CreateUserService();
-            return Ok(service.GetUsers());
-        }
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -392,6 +442,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             base.Dispose(disposing);
         }
 
+        #endregion
         #region Helpers
 
         private IAuthenticationManager Authentication
