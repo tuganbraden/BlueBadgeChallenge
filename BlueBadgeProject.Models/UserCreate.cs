@@ -43,6 +43,6 @@ namespace BlueBadgeProject.Models
         public bool IsLactoseFree { get; set; } = false;
         public bool IsGlutenFree { get; set; } = false;
         public DateTime GoalDate { get; set; }
-        public int DietId { get; set; }
+        public int? DietId { get; set; }
     }
 }

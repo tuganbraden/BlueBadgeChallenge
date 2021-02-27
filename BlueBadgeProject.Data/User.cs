@@ -19,7 +19,7 @@ namespace BlueBadgeProject.Data
 
             return userIdentity;
         }
-        public string UserId { get { return this.Id; } set { this.UserId = this.Id; } }// primary key is inherited 
+        public string UserId { get { return this.Id; }  }// primary key is inherited 
         [Required]
 
         public string FullName { get; set; }
@@ -52,7 +52,7 @@ namespace BlueBadgeProject.Data
         [Required]
         public bool IsGlutenFree { get; set; } = false;
         [ForeignKey(nameof(Diets))]
-        public int DietId { get; set; }
+        public int? DietId { get; set; }
         public virtual Diets Diets { get; set; }
 
     }
