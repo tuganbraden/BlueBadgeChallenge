@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
@@ -53,7 +54,7 @@ namespace BlueBadgeProject.Data
         public bool IsGlutenFree { get; set; } = false;
         [ForeignKey(nameof(Diets))]
         public int? DietId { get; set; }
-        public virtual Diets Diets { get; set; }
+        public virtual Diets Diets { get; set; } 
 
     }
 }
