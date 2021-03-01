@@ -64,6 +64,10 @@
     <Compile Include="DietDetail.cs" />
     <Compile Include="DietEdit.cs" />
     <Compile Include="DietListItem.cs" />
+    <Compile Include="FriendsCreate.cs" />
+    <Compile Include="FriendsDetail.cs" />
+    <Compile Include="FriendsEdit.cs" />
+    <Compile Include="FriendsListItem.cs" />
     <Compile Include="UserCreate.cs" />
     <Compile Include="UserDetail.cs" />
     <Compile Include="UserEdit.cs" />

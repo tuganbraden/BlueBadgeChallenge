@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Friends.cs" />
     <Compile Include="Migrations\202102232334106_InitialCreate.cs" />
     <Compile Include="Migrations\202102232334106_InitialCreate.designer.cs">
       <DependentUpon>202102232334106_InitialCreate.cs</DependentUpon>

@@ -10,9 +10,11 @@ using BlueBadgeProject.Models;
 
 namespace BlueBadgeProject.WebAPI.Controllers
 {
+    [RoutePrefix("api/Diets")]
     public class DietsController : ApiController
     {
         DietService dietService = new DietService();
+        [HttpPost]
         public IHttpActionResult AddDiet([FromBody] DietCreate model)
         {
             if (model is null)
@@ -36,12 +38,13 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             return BadRequest(ModelState);
         }
+        [HttpGet]
         public IHttpActionResult GetDietList()
         {
          return (IHttpActionResult) dietService.GetAllDiets();
 
         }
-        
+        [HttpGet]
         public IHttpActionResult GetAUsersDiet(string Id)
         {
             if (Id is null)
@@ -52,10 +55,10 @@ namespace BlueBadgeProject.WebAPI.Controllers
             {
                 return (IHttpActionResult)dietService.GetDietByUserId(Id);
             }
-            return BadRequest(ModelState);    
-            
+            return BadRequest(ModelState);           
 
         }
+        [HttpGet]
         public IHttpActionResult GetDietByNeeds(DietFind model)
         {
             if (model is null)
@@ -68,6 +71,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             return BadRequest(ModelState);
         }
+        [HttpPost]
         public IHttpActionResult DietEdit(DietEdit model)
         {
             if (model is null)
@@ -85,6 +89,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
            
             return BadRequest(ModelState);
         }
+        [HttpDelete]
         public IHttpActionResult DietDelete(int Id)
         {
             if (Id == 0)

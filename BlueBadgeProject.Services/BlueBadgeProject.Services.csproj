@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DietService.cs" />
+    <Compile Include="FriendsService.cs" />
     <Compile Include="IdentityConfig.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
