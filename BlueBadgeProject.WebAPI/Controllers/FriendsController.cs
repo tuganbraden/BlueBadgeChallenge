@@ -1,4 +1,5 @@
-﻿using BlueBadgeProject.Models;
+﻿using BlueBadgeProject.Data;
+using BlueBadgeProject.Models;
 using BlueBadgeProject.Services;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,23 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
 
             return BadRequest(ModelState);
+        }
+        [HttpGet]
+        public IHttpActionResult ViewFriendsDiets(string friendId)
+        {
+          
+                if (friendId is null)
+                {
+                    return BadRequest("Please enter a valid Friend Id. ");
+                }
+                if (ModelState.IsValid)
+                {
+                DietDetail friendsDiet = friendsService.ViewFriendsWorkoutPlan(friendId);
+                  
+                return Ok(friendsDiet.Name);
+                }
+
+            return BadRequest();
         }
 
     }

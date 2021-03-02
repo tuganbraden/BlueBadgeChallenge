@@ -61,6 +61,33 @@ namespace BlueBadgeProject.Services
             }
         }
         //View WorkoutPlan by Friend I
+        public DietDetail ViewFriendsWorkoutPlan(string friendId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Users
+                    .Where(e => friendId == e.UserId)
+                    .Select(e =>
+                        new User
+                        {
+                            DietId = e.DietId
+                        }
+                        );
+                var Z = (User)query;
+                var dietQuery =
+                 ctx
+                 .Diets
+                 .Single(e => e.DietId == Z.DietId);
+                return
+                    new DietDetail
+                    {
+                        DietId = dietQuery.DietId,
+                        Name = dietQuery.Name
+                    };
+            }
+        }
     }
 }
 
