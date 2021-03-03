@@ -526,7 +526,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 };
             }
         }
-
+        [Authorize(Roles = "Admin")]
         private static class RandomOAuthStateGenerator
         {
             private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
