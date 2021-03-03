@@ -12,8 +12,8 @@ namespace BlueBadgeProject.Services
     public class UserService
     {
         private readonly string _userId;
-        private UserManager _userManager;
-        public UserManager UserManager
+        private BlueBadgeProject.Data.Migrations.UserManager _userManager;
+        public BlueBadgeProject.Data.Migrations.UserManager UserManager
         {
             get
             {
@@ -24,7 +24,7 @@ namespace BlueBadgeProject.Services
                 _userManager = value;
             }
         }
-        public UserService(string userId, UserManager userManager)
+        public UserService(string userId, BlueBadgeProject.Data.Migrations.UserManager userManager)
         {
             _userManager = userManager;
             _userId = userId;

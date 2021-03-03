@@ -6,6 +6,9 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace BlueBadgeProject.Data
 {
@@ -22,11 +25,30 @@ namespace BlueBadgeProject.Data
     {
         Free, Premium, GoldTier
     }
+    public class AppUserClaim : IdentityUserClaim<string> { }
+    public class AppUserLogin : IdentityUserLogin<string> { }
+    public class AppRole: IdentityRole<string, ApplicationUserRole> {
+    public AppRole()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+    }
+    public class ApplicationUserRole : IdentityUserRole<string>
 
-    public class ApplicationDbContext : IdentityDbContext<User>
+    {
+
+        [Required]
+       
+        public virtual User User { get; set; }
+        [Required]
+        public virtual AppRole Role { get; set; }
+
+    }
+    public class ApplicationDbContext : IdentityDbContext<User, AppRole, string, AppUserLogin, ApplicationUserRole, AppUserClaim>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection"
+                  )
         {
         }
         public static ApplicationDbContext Create()
@@ -37,7 +59,7 @@ namespace BlueBadgeProject.Data
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
        // public DbSet<User> Users { get; set; }
         public DbSet<Diets> Diets { get; set; }
-        
+        public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
@@ -46,22 +68,23 @@ namespace BlueBadgeProject.Data
 
             modelBuilder
                 .Configurations
-                .Add(new IdentityUserLoginConfiguration())
-                .Add(new IdentityUserRoleConfiguration());
+                .Add(new AppUserLoginConfiguration())
+                .Add(new ApplicationUserRoleConfiguration());
         }
     }
-    public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
+    public class AppUserLoginConfiguration : EntityTypeConfiguration<AppUserLogin>
     {
-        public IdentityUserLoginConfiguration()
+        public AppUserLoginConfiguration()
         {
             HasKey(iul => iul.UserId);
         }
     }
-    public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
+    public class ApplicationUserRoleConfiguration : EntityTypeConfiguration<ApplicationUserRole>
     {
-        public IdentityUserRoleConfiguration()
+        public ApplicationUserRoleConfiguration()
         {
-            HasKey(iur => iur.UserId);
+            HasKey(iur => new {iur.UserId, iur.RoleId });
+           
         }
     }
 }

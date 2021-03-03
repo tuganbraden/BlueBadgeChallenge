@@ -27,14 +27,14 @@ namespace BlueBadgeProject.WebAPI.Controllers
     public class UserController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private UserManager _userManager;
+        private BlueBadgeProject.Data.Migrations.UserManager _userManager;
 
         public UserController()
         {
         }
 
-
-        public UserManager UserManager
+        
+        public BlueBadgeProject.Data.Migrations.UserManager UserManager
         {
             get
             {
@@ -159,7 +159,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            User user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
@@ -168,7 +168,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
 
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
+            foreach (AppUserLogin linkedAccount in user.Logins)
             {
                 logins.Add(new UserLoginInfoViewModel
                 {
@@ -550,7 +550,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         private UserService CreateUserService()
         {
             var userId = User.Identity.GetUserId();
-            UserManager userManager =  Request.GetOwinContext().GetUserManager<UserManager>();
+            BlueBadgeProject.Data.Migrations.UserManager userManager =  Request.GetOwinContext().GetUserManager<BlueBadgeProject.Data.Migrations.UserManager>();
             var clientService = new UserService(userId,userManager);
             return clientService;
         }
