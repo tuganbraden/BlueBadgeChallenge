@@ -9,18 +9,18 @@ namespace BlueBadgeProject.Models
 {
     public class DietEdit
     {
-        [Required]
+        [Key]
         public int DietId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
-        public bool IsVegetarian { get; set; } = false;
+        public bool IsVegetarian { get; set; }
         [Required]
-        public bool IsKeto { get; set; } = false;
+        public bool IsKeto { get; set; }
         [Required]
-        public bool IsLactoseFree { get; set; } = false;
+        public bool IsLactoseFree { get; set; }
         [Required]
-        public bool IsGlutenFree { get; set; } = false;
+        public bool IsGlutenFree { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
