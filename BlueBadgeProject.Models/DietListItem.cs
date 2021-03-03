@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace BlueBadgeProject.Models
 {
-    public class WorkoutPlanListItem
+    public class DietListItem
     {
-        public int PlanId { get; set; }
-        public string PlanName { get; set; }
+        public int DietId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

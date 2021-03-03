@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlueBadgeProject.Data
+namespace BlueBadgeProject.Models
 {
-    public class Diets
+    public class DietEdit
     {
-        [Key]
+        [Required]
         public int DietId { get; set; }
         [Required]
         public string Name { get; set; }
@@ -25,22 +25,5 @@ namespace BlueBadgeProject.Data
         public string Description { get; set; }
         [Required]
         public double CaloriesPerDay { get; set; }
-
-        public Diets(int dietId, string name, bool isVegetarian, bool isKeto, bool isLactoseFree, bool isGlutenFree, string description, double caloriesPerDey)
-        {
-            DietId = dietId;
-            Name = name;
-            IsVegetarian = isVegetarian;
-            IsKeto = isKeto;
-            IsLactoseFree = isLactoseFree;
-            IsGlutenFree = isGlutenFree;
-            Description = description;
-            CaloriesPerDay = caloriesPerDey;
-        }
-        public Diets()
-        {
-
-        }
     }
-
 }

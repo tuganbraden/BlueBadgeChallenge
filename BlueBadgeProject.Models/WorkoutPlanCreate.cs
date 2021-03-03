@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using BlueBadgeProject.Data;
 
 namespace BlueBadgeProject.Models
 {
+    public enum WorkoutType
+    {
+        Cardio, Strength, Flexibility
+    }
+
     public class WorkoutPlanCreate
     {
         [Required]

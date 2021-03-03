@@ -8,9 +8,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BlueBadgeProject.Data
 {
-    public class Client : IdentityUser
+    public class User : IdentityUser
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Client> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
@@ -19,12 +19,13 @@ namespace BlueBadgeProject.Data
 
             return userIdentity;
         }
-        public string ClientId { get { return this.Id; } set { this.ClientId = this.Id; } }// primary key is inherited 
+        public string UserId { get { return this.Id; }  }// primary key is inherited 
         [Required]
 
         public string FullName { get; set; }
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset ModifiedUtc { get; set; }
         [Required]
 
         public double Height { get; set; }
@@ -51,7 +52,7 @@ namespace BlueBadgeProject.Data
         [Required]
         public bool IsGlutenFree { get; set; } = false;
         [ForeignKey(nameof(Diets))]
-        public int DietId { get; set; }
+        public int? DietId { get; set; }
         public virtual Diets Diets { get; set; }
 
     }

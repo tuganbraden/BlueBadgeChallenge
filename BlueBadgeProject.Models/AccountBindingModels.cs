@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
-namespace BlueBadgeProject.WebAPI.Models
+namespace BlueBadgeProject.Models
 {
-    // Models used as parameters to AccountController actions.
+    // Models used as parameters to UserController actions.
 
     public class AddExternalLoginBindingModel
     {
