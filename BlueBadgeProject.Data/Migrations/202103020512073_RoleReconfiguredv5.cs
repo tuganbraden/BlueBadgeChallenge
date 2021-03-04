@@ -3,10 +3,82 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class RoleReconfiguredv5 : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.ApplicationUserRole",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AppRole", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.AppRole",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.User",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        FullName = c.String(nullable: false),
+                        CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
+                        ModifiedUtc = c.DateTimeOffset(nullable: false, precision: 7),
+                        Height = c.Double(nullable: false),
+                        Weight = c.Double(nullable: false),
+                        GoalWeight = c.Double(nullable: false),
+                        GoalDate = c.DateTime(nullable: false),
+                        SubscriberStatus = c.Int(nullable: false),
+                        WeeklyCaloricNeed = c.Double(nullable: false),
+                        BodyType = c.Int(nullable: false),
+                        LifeStyleType = c.Int(nullable: false),
+                        IsVegetarian = c.Boolean(nullable: false),
+                        IsKeto = c.Boolean(nullable: false),
+                        IsLactoseFree = c.Boolean(nullable: false),
+                        IsGlutenFree = c.Boolean(nullable: false),
+                        DietId = c.Int(),
+                        Email = c.String(),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Diets", t => t.DietId)
+                .Index(t => t.DietId);
+            
+            CreateTable(
+                "dbo.AppUserClaim",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.User", t => t.UserId)
+                .Index(t => t.UserId);
+            
             CreateTable(
                 "dbo.Diets",
                 c => new
@@ -23,82 +95,7 @@
                 .PrimaryKey(t => t.DietId);
             
             CreateTable(
-                "dbo.IdentityRole",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.IdentityUserRole",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(),
-                        IdentityRole_Id = c.String(maxLength: 128),
-                        User_Id = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.IdentityRole", t => t.IdentityRole_Id)
-                .ForeignKey("dbo.User", t => t.User_Id)
-                .Index(t => t.IdentityRole_Id)
-                .Index(t => t.User_Id);
-            
-            CreateTable(
-                "dbo.User",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(),
-                        FullName = c.String(nullable: false),
-                        CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
-                        ModifiedUtc = c.DateTimeOffset(nullable: false, precision: 7),
-                        Height = c.Double(nullable: false),
-                        Weight = c.Double(nullable: false),
-                        GoalWeight = c.Double(nullable: false),
-                        GoalDate = c.DateTime(nullable: false),
-                        SubscriberStatus = c.Int(nullable: false),
-                        WeeklyCaloricNeed = c.Double(nullable: false),
-                        BodyType = c.Int(nullable: false),
-                        LifeStyleType = c.Int(nullable: false),
-                        IsVegetarian = c.Boolean(nullable: false),
-                        IsKeto = c.Boolean(nullable: false),
-                        IsLactoseFree = c.Boolean(nullable: false),
-                        IsGlutenFree = c.Boolean(nullable: false),
-                        DietId = c.Int(nullable: false),
-                        Email = c.String(),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Diets", t => t.DietId, cascadeDelete: true)
-                .Index(t => t.DietId);
-            
-            CreateTable(
-                "dbo.IdentityUserClaim",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.User", t => t.UserId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.IdentityUserLogin",
+                "dbo.AppUserLogin",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
@@ -129,24 +126,24 @@
         public override void Down()
         {
             DropForeignKey("dbo.WorkoutPlan", "CreatedBy", "dbo.User");
-            DropForeignKey("dbo.IdentityUserRole", "User_Id", "dbo.User");
-            DropForeignKey("dbo.IdentityUserLogin", "User_Id", "dbo.User");
+            DropForeignKey("dbo.ApplicationUserRole", "UserId", "dbo.User");
+            DropForeignKey("dbo.AppUserLogin", "User_Id", "dbo.User");
             DropForeignKey("dbo.User", "DietId", "dbo.Diets");
-            DropForeignKey("dbo.IdentityUserClaim", "UserId", "dbo.User");
-            DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
+            DropForeignKey("dbo.AppUserClaim", "UserId", "dbo.User");
+            DropForeignKey("dbo.ApplicationUserRole", "RoleId", "dbo.AppRole");
             DropIndex("dbo.WorkoutPlan", new[] { "CreatedBy" });
-            DropIndex("dbo.IdentityUserLogin", new[] { "User_Id" });
-            DropIndex("dbo.IdentityUserClaim", new[] { "UserId" });
+            DropIndex("dbo.AppUserLogin", new[] { "User_Id" });
+            DropIndex("dbo.AppUserClaim", new[] { "UserId" });
             DropIndex("dbo.User", new[] { "DietId" });
-            DropIndex("dbo.IdentityUserRole", new[] { "User_Id" });
-            DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
+            DropIndex("dbo.ApplicationUserRole", new[] { "RoleId" });
+            DropIndex("dbo.ApplicationUserRole", new[] { "UserId" });
             DropTable("dbo.WorkoutPlan");
-            DropTable("dbo.IdentityUserLogin");
-            DropTable("dbo.IdentityUserClaim");
-            DropTable("dbo.User");
-            DropTable("dbo.IdentityUserRole");
-            DropTable("dbo.IdentityRole");
+            DropTable("dbo.AppUserLogin");
             DropTable("dbo.Diets");
+            DropTable("dbo.AppUserClaim");
+            DropTable("dbo.User");
+            DropTable("dbo.AppRole");
+            DropTable("dbo.ApplicationUserRole");
         }
     }
 }
