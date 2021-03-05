@@ -10,6 +10,7 @@ namespace BlueBadgeProject.Services
 {
     public class FriendsService
     {
+        //Add Friend
         public bool AddFriends(FriendsCreate model)
 
         {
@@ -24,8 +25,9 @@ namespace BlueBadgeProject.Services
                 ctx.Friends.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-        }
 
+        }
+        //TODO - go through a 2nd lambda to add the friendd name to the list here
         public List<FriendsListItem> GetListOfFriends(string Id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -44,7 +46,7 @@ namespace BlueBadgeProject.Services
                 return query.ToList();
             }
         }
-
+         //Delete Friend
         public bool DeleteFriend(FriendsDetail model)
         {
             using (var ctx = new ApplicationDbContext())
@@ -58,7 +60,7 @@ namespace BlueBadgeProject.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
+        //View WorkoutPlan by Friend I
         public DietDetail ViewFriendsWorkoutPlan(string friendId)
         {
             using (var ctx = new ApplicationDbContext())

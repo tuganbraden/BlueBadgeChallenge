@@ -11,8 +11,8 @@ using System.Web.Http.ModelBinding;
 namespace BlueBadgeProject.WebAPI.Controllers
 {
     [RoutePrefix("api/Friends")]
-    public class FriendsController : ApiController
-    {
+    public class FriendsController: ApiController
+    {       
         FriendsService friendsService = new FriendsService();
         [HttpPost]
         public IHttpActionResult AddYourFriends([FromBody] FriendsCreate model)
@@ -64,17 +64,18 @@ namespace BlueBadgeProject.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult ViewFriendsDiets(string friendId)
         {
-
-            if (friendId is null)
-            {
-                return BadRequest("Please enter a valid Friend Id. ");
-            }
-            if (ModelState.IsValid)
-            {
+          
+                if (friendId is null)
+                {
+                    return BadRequest("Please enter a valid Friend Id. ");
+                }
+                if (ModelState.IsValid)
+                {
                 DietDetail friendsDiet = friendsService.ViewFriendsWorkoutPlan(friendId);
-
+                  
                 return Ok(friendsDiet.Name);
-            }
+                }
+
             return BadRequest();
         }
 

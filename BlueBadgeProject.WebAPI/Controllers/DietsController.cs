@@ -15,7 +15,6 @@ namespace BlueBadgeProject.WebAPI.Controllers
     {
         DietService dietService = new DietService();
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddDiet([FromBody] DietCreate model)
         {
             if (model is null)
@@ -24,7 +23,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             if (ModelState.IsValid)
             {
-
+                
                 var created = dietService.CreateDiet(model);
                 if (created == true)
                 {
@@ -34,15 +33,15 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 {
                     return BadRequest("Your diet was not created. Please try again. ");
 
-                }
-
+                }                      
+                        
             }
             return BadRequest(ModelState);
         }
         [HttpGet]
         public IHttpActionResult GetDietList()
         {
-            return (IHttpActionResult)dietService.GetAllDiets();
+         return (IHttpActionResult) dietService.GetAllDiets();
 
         }
         [HttpGet]
@@ -56,7 +55,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             {
                 return (IHttpActionResult)dietService.GetDietByUserId(Id);
             }
-            return BadRequest(ModelState);
+            return BadRequest(ModelState);           
 
         }
         [HttpGet]
@@ -73,7 +72,6 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult DietEdit(DietEdit model)
         {
             if (model is null)
@@ -87,12 +85,11 @@ namespace BlueBadgeProject.WebAPI.Controllers
                     return Ok();
                 else
                     return BadRequest("Your diet could not be edited. Please try again. ");
-            }
+            }          
+           
             return BadRequest(ModelState);
         }
-
         [HttpDelete]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult DietDelete(int Id)
         {
             if (Id == 0)
@@ -107,8 +104,9 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 else
                     return BadRequest("Your diet could not be deleted. Please try again. ");
             }
+
             return BadRequest(ModelState);
-        }
+        }       
 
     }
 }
