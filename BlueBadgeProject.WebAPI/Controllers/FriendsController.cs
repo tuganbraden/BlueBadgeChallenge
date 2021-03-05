@@ -71,7 +71,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                DietDetail friendsDiet = friendsService.ViewFriendsWorkoutPlan(friendId);
+                DietDetail friendsDiet = friendsService.ViewFriendsDietPlan(friendId);
                   
                 return Ok(friendsDiet.Name);
                 }

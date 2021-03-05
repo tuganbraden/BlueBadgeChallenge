@@ -88,8 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.cs" />
-    <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.designer.cs">
-      <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
+	  <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.designer.cs">
+		  <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
+	  </Compile>
     <Compile Include="Friends.cs" />
     <Compile Include="Migrations\202102232334106_InitialCreate.cs" />
     <Compile Include="Migrations\202102232334106_InitialCreate.designer.cs">
