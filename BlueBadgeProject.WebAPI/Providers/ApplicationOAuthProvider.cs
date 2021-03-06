@@ -31,7 +31,7 @@ namespace BlueBadgeProject.WebAPI.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<BlueBadgeProject.Data.Migrations.UserManager>();
+            var userManager = context.OwinContext.GetUserManager<UserManager>();
 
             User user = await userManager.FindAsync(context.UserName, context.Password);
 

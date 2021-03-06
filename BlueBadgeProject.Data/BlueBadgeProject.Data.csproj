@@ -87,10 +87,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.cs" />
-    <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.designer.cs">
-      <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
-    <Compile Include="Friends.cs" />
     <Compile Include="Migrations\202102232334106_InitialCreate.cs" />
     <Compile Include="Migrations\202102232334106_InitialCreate.designer.cs">
       <DependentUpon>202102232334106_InitialCreate.cs</DependentUpon>
@@ -115,8 +111,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103020512073_RoleReconfiguredv5.resx">
-      <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202102232334106_InitialCreate.resx">
+      <DependentUpon>202102232334106_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102240007070_NullableDiet.resx">
+      <DependentUpon>202102240007070_NullableDiet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102240100223_ChangedUserId.resx">
+      <DependentUpon>202102240100223_ChangedUserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
