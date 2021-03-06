@@ -27,20 +27,14 @@ namespace BlueBadgeProject.WebAPI.Controllers
     public class UserController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private UserManager _userManager;
+        private BlueBadgeProject.Data.Migrations.UserManager _userManager;
 
         public UserController()
         {
         }
 
-        public UserController(
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
-        {
-            
-            AccessTokenFormat = accessTokenFormat;
-        }
-
-        public UserManager UserManager
+        
+        public BlueBadgeProject.Data.Migrations.UserManager UserManager
         {
             get
             {
@@ -50,6 +44,90 @@ namespace BlueBadgeProject.WebAPI.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> Register(UserCreate model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateUserService();
+            if (!await service.CreateUser(model))
+
+
+
+                return InternalServerError();
+           
+
+            return Ok();
+        }
+        [HttpGet]
+        [Route("GetAll")]
+        public IHttpActionResult GetAll()
+        {
+            var service = CreateUserService();
+            return Ok(service.GetUsers());
+        }
+        [HttpGet]
+        [Route("GetUserInfo")]
+        public IHttpActionResult GetUserInfo(string userId)
+        {
+            var service = CreateUserService();
+            try
+            {
+                return Ok(service.GetUserById(userId));
+            }catch(Exception e)
+            {
+                return InternalServerError();
+            }
+
+        }
+        [HttpPut]
+        [Route("Edit")]
+        public IHttpActionResult EditUser([FromBody]UserEdit model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var service = CreateUserService();
+            try
+            {
+                if(!service.UpdateUser(model))
+                    return InternalServerError();
+                return Ok();
+            }catch(Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteUserById")]
+        public IHttpActionResult DeleteUser([FromBody]string userId)
+        {
+            var service = CreateUserService();
+            try
+            {
+                if (!service.DeleteUser(userId))
+                    return InternalServerError();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+        #region BuiltInEndpoints
+        public UserController(
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        {
+            
+            AccessTokenFormat = accessTokenFormat;
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -81,7 +159,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            User user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
@@ -90,7 +168,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
 
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
+            foreach (AppUserLogin linkedAccount in user.Logins)
             {
                 logins.Add(new UserLoginInfoViewModel
                 {
@@ -320,28 +398,6 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             return logins;
         }
-
-        // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(UserCreate model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var service = CreateUserService();
-            if (!await service.CreateUser(model))
-
-
-
-                return InternalServerError();
-           
-
-            return Ok();
-        }
-
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -386,6 +442,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             base.Dispose(disposing);
         }
 
+        #endregion
         #region Helpers
 
         private IAuthenticationManager Authentication
@@ -469,7 +526,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 };
             }
         }
-
+        [Authorize(Roles = "Admin")]
         private static class RandomOAuthStateGenerator
         {
             private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
@@ -493,7 +550,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         private UserService CreateUserService()
         {
             var userId = User.Identity.GetUserId();
-            UserManager userManager =  Request.GetOwinContext().GetUserManager<UserManager>();
+            BlueBadgeProject.Data.Migrations.UserManager userManager =  Request.GetOwinContext().GetUserManager<BlueBadgeProject.Data.Migrations.UserManager>();
             var clientService = new UserService(userId,userManager);
             return clientService;
         }
