@@ -13,6 +13,13 @@ namespace BlueBadgeProject.Data
         public string MyUserId { get; set; }
         [Required]
         public string FriendUserId { get; set; }
-        
+        public Friends(string myUserId, string friendUserId)
+        {
+            MyUserId = myUserId;
+            FriendUserId = friendUserId;           
+        }
+        public Friends()
+        {
+        }
     }
 }
