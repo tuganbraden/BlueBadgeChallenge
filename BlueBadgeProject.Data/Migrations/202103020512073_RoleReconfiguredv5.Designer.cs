@@ -7,13 +7,13 @@ namespace BlueBadgeProject.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class ChangedUserId : IMigrationMetadata
+    public sealed partial class RoleReconfiguredv5 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedUserId));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RoleReconfiguredv5));
         
         string IMigrationMetadata.Id
         {
-            get { return "202102240100223_ChangedUserId"; }
+            get { return "202103020512073_RoleReconfiguredv5"; }
         }
         
         string IMigrationMetadata.Source
