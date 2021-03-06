@@ -125,10 +125,10 @@
             diets.CaloriesPerDay = 2000;
 
 
-            var friends = new FriendsCreate();
+            var friends = new Friends();
 
             friends.MyUserId = //pass in user ID
-            friends.FriendUserId = 1;//need to tie these to Connors UserIds
+            friends.FriendUserId = "test";//need to tie these to Connors UserIds
         }
     }
     public class UserManager : Microsoft.AspNet.Identity.UserManager<User, string>
