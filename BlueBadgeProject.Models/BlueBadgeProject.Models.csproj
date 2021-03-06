@@ -59,11 +59,25 @@
   <ItemGroup>
     <Compile Include="AccountBindingModels.cs" />
     <Compile Include="AccountViewModels.cs" />
+    <Compile Include="AdminModels\AdminListItem.cs" />
+    <Compile Include="UserModels\UserCreate.cs" />
+    <Compile Include="UserModels\UserDetail.cs" />
+    <Compile Include="UserModels\UserEdit.cs" />
+    <Compile Include="UserModels\UserListItem.cs" />
+    <Compile Include="DietModels.cs" />
+    <Compile Include="DietFind.cs" />
+    <Compile Include="DietCreate.cs" />
+    <Compile Include="DietDetail.cs" />
+    <Compile Include="DietEdit.cs" />
+    <Compile Include="DietListItem.cs" />
+    <Compile Include="FriendsCreate.cs" />
+    <Compile Include="FriendsDetail.cs" />
+    <Compile Include="FriendsEdit.cs" />
+    <Compile Include="FriendsListItem.cs" />
     <Compile Include="UserCreate.cs" />
     <Compile Include="UserDetail.cs" />
     <Compile Include="UserEdit.cs" />
     <Compile Include="UserListItem.cs" />
-    <Compile Include="DietModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkoutPlanCreate.cs" />
     <Compile Include="WorkoutPlanDetail.cs" />
