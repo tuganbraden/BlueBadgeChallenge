@@ -106,8 +106,30 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return InternalServerError();
             }
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        [Route("AdminEdit")]
+        public IHttpActionResult EditUserAdmin([FromBody] UserEdit model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var service = CreateUserService();
+            try
+            {
+                if (!service.UpdateUserAdmin(model))
+                    return InternalServerError();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
         [HttpDelete]
         [Route("DeleteUserById")]
+        [Authorize(Roles= "Admin")]
         public IHttpActionResult DeleteUser([FromBody]string userId)
         {
             var service = CreateUserService();
@@ -122,6 +144,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return InternalServerError();
             }
         }
+        
         #region BuiltInEndpoints
         public UserController(
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
@@ -526,7 +549,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 };
             }
         }
-        [Authorize(Roles = "Admin")]
+
         private static class RandomOAuthStateGenerator
         {
             private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();

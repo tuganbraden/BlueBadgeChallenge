@@ -25,7 +25,7 @@ namespace BlueBadgeProject.Services
         }
         public AdminService(Data.Migrations.UserManager userManager)
         {
-            _userManager = UserManager;
+            _userManager = userManager;
 
         }
         public IEnumerable<AdminListItem> GetAdmins()
@@ -68,7 +68,7 @@ namespace BlueBadgeProject.Services
 
                 try
                 {
-                    var entity = ctx.Users.Single(e => e.UserId == userId);
+                    var entity = ctx.Users.Single(e => e.Id == userId);
                     var result = await UserManager.AddToRoleAsync(entity.Id, "Admin");
 
                     return result.Succeeded;
