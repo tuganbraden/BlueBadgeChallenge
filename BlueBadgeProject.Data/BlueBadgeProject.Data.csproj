@@ -88,22 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.cs" />
-	  <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.designer.cs">
-		  <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
-	  </Compile>
+    <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.designer.cs">
+      <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Friends.cs" />
-    <Compile Include="Migrations\202102232334106_InitialCreate.cs" />
-    <Compile Include="Migrations\202102232334106_InitialCreate.designer.cs">
-      <DependentUpon>202102232334106_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102240007070_NullableDiet.cs" />
-    <Compile Include="Migrations\202102240007070_NullableDiet.designer.cs">
-      <DependentUpon>202102240007070_NullableDiet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102240100223_ChangedUserId.cs" />
-    <Compile Include="Migrations\202102240100223_ChangedUserId.designer.cs">
-      <DependentUpon>202102240100223_ChangedUserId.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Diets.cs" />
