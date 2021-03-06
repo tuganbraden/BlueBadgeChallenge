@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminService.cs" />
     <Compile Include="DietService.cs" />
     <Compile Include="IdentityConfig.cs" />
     <Compile Include="UserService.cs" />
