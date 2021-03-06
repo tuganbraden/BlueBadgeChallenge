@@ -26,7 +26,7 @@ namespace BlueBadgeProject.Data
         [Required]
         public double CaloriesPerDay { get; set; }
 
-        public DietCreate(int dietId, string name, bool isVegetarian, bool isKeto, bool isLactoseFree, bool isGlutenFree, string description, double caloriesPerDey)
+        public DietCreate(int dietId, string name, bool isVegetarian, bool isKeto, bool isLactoseFree, bool isGlutenFree, string description, double caloriesPerDay)
         {
             DietId = dietId;
             Name = name;
@@ -35,7 +35,7 @@ namespace BlueBadgeProject.Data
             IsLactoseFree = isLactoseFree;
             IsGlutenFree = isGlutenFree;
             Description = description;
-            CaloriesPerDay = caloriesPerDey;
+            CaloriesPerDay = caloriesPerDay;
         }
         public DietCreate()
         {
