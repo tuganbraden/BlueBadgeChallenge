@@ -10,8 +10,10 @@ using System.Web.Http;
 
 namespace BlueBadgeProject.WebAPI.Controllers
 {
+    [RoutePrefix("api/WorkoutPlans")]
     public class WorkoutPlanController : ApiController
     {
+        [HttpPost]
         private WorkoutPlanService CreateWorkoutPlanService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
@@ -19,6 +21,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return workoutPlanService;
         }
 
+        [HttpGet]
         public IHttpActionResult Get()
         {
             WorkoutPlanService workoutPlanService = CreateWorkoutPlanService();
@@ -26,6 +29,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok(workoutPlans);
         }
 
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             WorkoutPlanService workoutPlanService = CreateWorkoutPlanService();
@@ -33,6 +37,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok(workoutPlan);
         }
 
+        [HttpPost]
         public IHttpActionResult Post(WorkoutPlanCreate workoutPlan)
         {
             if (!ModelState.IsValid)
@@ -46,6 +51,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok();
         }
 
+        [HttpPut]
         public IHttpActionResult Put(WorkoutPlanEdit plan)
         {
             if(ModelState.IsValid)
@@ -60,6 +66,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return BadRequest(ModelState);
         }
 
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateWorkoutPlanService();
