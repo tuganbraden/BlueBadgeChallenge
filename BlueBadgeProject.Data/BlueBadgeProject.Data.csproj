@@ -91,6 +91,7 @@
     <Compile Include="Migrations\202103020512073_RoleReconfiguredv5.designer.cs">
       <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Friends.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Diets.cs" />

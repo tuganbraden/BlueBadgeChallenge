@@ -64,7 +64,15 @@
     <Compile Include="UserModels\UserDetail.cs" />
     <Compile Include="UserModels\UserEdit.cs" />
     <Compile Include="UserModels\UserListItem.cs" />
-    <Compile Include="DietModels.cs" />
+    <Compile Include="DietFind.cs" />
+    <Compile Include="DietCreate.cs" />
+    <Compile Include="DietDetail.cs" />
+    <Compile Include="DietEdit.cs" />
+    <Compile Include="DietListItem.cs" />
+    <Compile Include="FriendsCreate.cs" />
+    <Compile Include="FriendsDetail.cs" />
+    <Compile Include="FriendsEdit.cs" />
+    <Compile Include="FriendsListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkoutPlanCreate.cs" />
     <Compile Include="WorkoutPlanDetail.cs" />

@@ -1,18 +1,18 @@
 ﻿using BlueBadgeProject.Data;
+using BlueBadgeProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BlueBadgeProject.Models.DietModels;
 
 
 public class DietService
 {
-    public bool CreateDiet(Diet model)
+    public bool CreateDiet(BlueBadgeProject.Models.DietCreate model)
     {
         var entity =
-            new Diets()
+            new BlueBadgeProject.Data.DietCreate()
             {
                 Name = model.Name,
                 IsVegetarian = model.IsVegetarian,
@@ -29,17 +29,17 @@ public class DietService
         }
     }
 
-    public List<Diets> GetAllDiets()
+    public List<DietDetail> GetAllDiets()
     {
         using (var ctx = new ApplicationDbContext())
         {
-            //TODO: Will this .Select return one or a list?
             var query =
                 ctx
                 .Diets
                 .Select(e =>
-                    new Diets
-                    {                        
+                    new DietDetail
+                    {             
+                        DietId = e.DietId,
                         Name = e.Name,
                         IsVegetarian = e.IsVegetarian,
                         IsKeto = e.IsKeto,
@@ -54,16 +54,16 @@ public class DietService
         }
     }
 
-    public Diet GetDietByClientId(string ClientId)
+    public DietDetail GetDietByUserId(string UserId)
     {
         using (var ctx = new ApplicationDbContext())
         {
-            var myclient =
+            var myuser =
                 ctx
                 .Users
-                .Single(e => e.UserId == ClientId);
+                .Single(e => e.UserId == UserId);
 
-            var DietId = myclient.DietId;
+            var DietId = myuser.DietId;
 
             var Entity =
                 ctx
@@ -71,7 +71,7 @@ public class DietService
                 .Single(e => e.DietId == DietId);
 
             return
-                new Diet
+                new DietDetail
                 {
                     DietId = Entity.DietId,
                     Name = Entity.Name,
@@ -86,7 +86,8 @@ public class DietService
         }
     }
 
-    public List<Diets> GetDietByClientsNeeds(Diet needs)
+
+    public List<DietListItem> GetDietByUserNeeds(DietFind needs)
     {
         using (var ctx = new ApplicationDbContext())
         {
@@ -100,15 +101,10 @@ public class DietService
                             e.IsGlutenFree == needs.IsGlutenFree
                     )
                 .Select(e =>
-                    new Diets
-                    {
-                        Name = e.Name,
-                        IsVegetarian = e.IsVegetarian,
-                        IsKeto = e.IsKeto,
-                        IsLactoseFree = e.IsLactoseFree,
-                        IsGlutenFree = e.IsGlutenFree,
-                        Description = e.Description,
-                        CaloriesPerDay = e.CaloriesPerDay
+                    new DietListItem
+                    {   DietId = e.DietId,
+                        Name = e.Name,                      
+                        Description = e.Description                
                     }
                     );
             return query.ToList();
@@ -116,7 +112,7 @@ public class DietService
         }
     }
 
-    public bool EditADiet(Diet model)
+    public bool EditADiet(DietEdit model)
     {
         using (var ctx = new ApplicationDbContext())
         {

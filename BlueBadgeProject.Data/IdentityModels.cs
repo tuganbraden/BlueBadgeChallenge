@@ -58,8 +58,10 @@ namespace BlueBadgeProject.Data
         
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
        // public DbSet<User> Users { get; set; }
-        public DbSet<Diets> Diets { get; set; }
+        public DbSet<DietCreate> Diets { get; set; }
         public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
+        public DbSet<Friends> Friends { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
