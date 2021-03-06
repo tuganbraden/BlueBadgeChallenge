@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 public class DietService
 {
-    public bool CreateDiet(DietCreate model)
+    public bool CreateDiet(BlueBadgeProject.Models.DietCreate model)
     {
         var entity =
-            new Diets()
+            new BlueBadgeProject.Data.DietCreate()
             {
                 Name = model.Name,
                 IsVegetarian = model.IsVegetarian,

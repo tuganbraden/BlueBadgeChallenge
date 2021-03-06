@@ -399,6 +399,12 @@
     <Content Include="Scripts\jquery-3.5.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BlueBadgeProject.Data\BlueBadgeProject.Data.csproj">
       <Project>{64514575-8c25-4df3-a08a-02fbb82899a5}</Project>
       <Name>BlueBadgeProject.Data</Name>
@@ -411,12 +417,6 @@
       <Project>{70b63786-3796-4dbe-b7e7-cf187d0a572a}</Project>
       <Name>BlueBadgeProject.Services</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -15,7 +15,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
     {
         DietService dietService = new DietService();
         [HttpPost]
-        public IHttpActionResult AddDiet([FromBody] DietCreate model)
+        public IHttpActionResult AddDiet([FromBody] Models.DietCreate model)
         {
             if (model is null)
             {
@@ -106,7 +106,8 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
 
             return BadRequest(ModelState);
-        }       
+        }
+        
 
     }
 }

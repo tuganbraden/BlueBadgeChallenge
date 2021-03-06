@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlueBadgeProject.Data
 {
-    public class Diets
+    public class DietCreate
     {
         [Key]
         public int DietId { get; set; }
@@ -26,7 +26,7 @@ namespace BlueBadgeProject.Data
         [Required]
         public double CaloriesPerDay { get; set; }
 
-        public Diets(int dietId, string name, bool isVegetarian, bool isKeto, bool isLactoseFree, bool isGlutenFree, string description, double caloriesPerDey)
+        public DietCreate(int dietId, string name, bool isVegetarian, bool isKeto, bool isLactoseFree, bool isGlutenFree, string description, double caloriesPerDey)
         {
             DietId = dietId;
             Name = name;
@@ -37,7 +37,7 @@ namespace BlueBadgeProject.Data
             Description = description;
             CaloriesPerDay = caloriesPerDey;
         }
-        public Diets()
+        public DietCreate()
         {
 
         }
