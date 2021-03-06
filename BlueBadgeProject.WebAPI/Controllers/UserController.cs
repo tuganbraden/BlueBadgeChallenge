@@ -67,6 +67,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok();
         }
         [HttpGet]
+        [AllowAnonymous]
         [Route("GetAll")]
         public IHttpActionResult GetAll()
         {
