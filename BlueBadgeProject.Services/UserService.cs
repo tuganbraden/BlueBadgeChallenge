@@ -12,8 +12,8 @@ namespace BlueBadgeProject.Services
     public class UserService
     {
         private readonly string _userId;
-        private BlueBadgeProject.Data.Migrations.UserManager _userManager;
-        public BlueBadgeProject.Data.Migrations.UserManager UserManager
+        private UserManager _userManager;
+        public UserManager UserManager
         {
             get
             {
@@ -24,7 +24,7 @@ namespace BlueBadgeProject.Services
                 _userManager = value;
             }
         }
-        public UserService(string userId, BlueBadgeProject.Data.Migrations.UserManager userManager)
+        public UserService(string userId, UserManager userManager)
         {
             _userManager = userManager;
             _userId = userId;
@@ -62,7 +62,7 @@ namespace BlueBadgeProject.Services
                     ctx.Users.Select(
                        e => new UserListItem
                        {
-                           UserName = e.UserName,
+                           UserId = e.UserId,
                            FullName = e.FullName,
                            SubscriberStatus = e.SubscriberStatus,
                            CreatedUtc = e.CreatedUtc
@@ -74,11 +74,11 @@ namespace BlueBadgeProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Users.Single(e => e.Id == id);
+                var entity = ctx.Users.Single(e => e.UserId == id);
                 return
                     new UserDetail
                     {
-                        UserId = entity.Id,
+                        UserId = entity.UserId,
                         FullName = entity.FullName,
                         CreatedUtc = entity.CreatedUtc,
                         Height = entity.Height,
@@ -102,7 +102,7 @@ namespace BlueBadgeProject.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
-                    ctx.Users.Single(e => e.Id == model.UserId);
+                    ctx.Users.Single(e => e.UserId == model.UserId);
                 entity.FullName = model.FullName;
                 entity.Height = model.Height;
                 entity.Weight = model.Weight;
@@ -125,7 +125,7 @@ namespace BlueBadgeProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Users.Single(e => e.Id == userId);
+                var entity = ctx.Users.Single(e => e.UserId == userId);
                 ctx.Users.Remove(entity);
                 return ctx.SaveChanges() >= 1;
             }
