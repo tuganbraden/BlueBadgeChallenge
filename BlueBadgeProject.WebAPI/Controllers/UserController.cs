@@ -74,9 +74,10 @@ namespace BlueBadgeProject.WebAPI.Controllers
             var service = CreateUserService();
             return Ok(service.GetUsers());
         }
+        [AllowAnonymous]
         [HttpGet]
         [Route("GetUserInfo")]
-        public IHttpActionResult GetUserInfo(string userId)
+        public IHttpActionResult GetUserInfo([FromUri]string userId)
         {
             var service = CreateUserService();
             try
@@ -89,6 +90,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
         }
         [HttpPut]
+        [AllowAnonymous]
         [Route("Edit")]
         public IHttpActionResult EditUser([FromBody]UserEdit model)
         {

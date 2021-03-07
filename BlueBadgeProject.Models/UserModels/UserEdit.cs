@@ -36,6 +36,6 @@ namespace BlueBadgeProject.Models
 
         public bool IsGlutenFree { get; set; } = false;
 
-        public int DietId { get; set; }// might change to Diets name
+        public int? DietId { get; set; }// might change to Diets name
     }
 }

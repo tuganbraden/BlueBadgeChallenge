@@ -65,6 +65,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -173,6 +177,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -182,6 +187,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlueBadgeProject.Data\BlueBadgeProject.Data.csproj">
+      <Project>{64514575-8C25-4DF3-A08A-02FBB82899A5}</Project>
+      <Name>BlueBadgeProject.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueBadgeProject.Models\BlueBadgeProject.Models.csproj">
       <Project>{F38DBA51-DCE0-4A4F-9C7F-6647C1688A19}</Project>
       <Name>BlueBadgeProject.Models</Name>

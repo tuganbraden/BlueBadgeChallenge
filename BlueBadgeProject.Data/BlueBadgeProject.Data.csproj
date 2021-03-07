@@ -92,6 +92,10 @@
       <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
     </Compile>
     <Compile Include="Friends.cs" />
+    <Compile Include="Migrations\202103062219362_merge.cs" />
+    <Compile Include="Migrations\202103062219362_merge.designer.cs">
+      <DependentUpon>202103062219362_merge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Diets.cs" />
@@ -106,6 +110,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202103020512073_RoleReconfiguredv5.resx">
       <DependentUpon>202103020512073_RoleReconfiguredv5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103062219362_merge.resx">
+      <DependentUpon>202103062219362_merge.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
