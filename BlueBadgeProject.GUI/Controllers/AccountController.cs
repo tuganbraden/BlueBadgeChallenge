@@ -12,6 +12,7 @@ using System.Web.WebPages;
 using BlueBadgeProject.Data;
 using BlueBadgeProject.Data.Migrations;
 using BlueBadgeProject.GUI.Models;
+using BlueBadgeProject.Models.UserModels;
 using BlueBadgeProject.WebAPI;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,7 +21,7 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace BlueBadgeProject.GUI.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private BlueBadgeProject.Data.Migrations.ApplicationSignInManager _signInManager;
@@ -112,11 +113,9 @@ namespace BlueBadgeProject.GUI.Controllers
 
                 var token = result.Content.ReadAsAsync<TokenModel>();
                 token.Wait();
-                var tokenString = token.Result.AccessToken;
-                ////////SignInManager.AuthenticationManager.SignIn(Request.GetOwinContext().)
-                SignInManager.BearerToken.Add("bearer", tokenString);
-                bool testbool= Request.GetOwinContext().Authentication.User.Identity.IsAuthenticated;
-                int i = 0;
+                
+                Startup.token = token.Result;
+                
                 Startup.hasToken = true;
                 Startup.UserName = model.Email;
                 return RedirectToLocal(returnUrl);
@@ -423,10 +422,13 @@ namespace BlueBadgeProject.GUI.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Startup.hasToken = false;
+            Startup.token = null;
+            
             return RedirectToAction("Index", "Home");
         }
 

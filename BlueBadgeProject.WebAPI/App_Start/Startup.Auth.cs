@@ -15,6 +15,7 @@ using BlueBadgeProject.Services;
 using System.Web.Http;
 using BlueBadgeProject.Data.Migrations;
 using Microsoft.AspNet.Identity.Owin;
+using BlueBadgeProject.Models.UserModels;
 
 namespace BlueBadgeProject.WebAPI
 {
@@ -23,9 +24,10 @@ namespace BlueBadgeProject.WebAPI
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
-        public static bool hasToken { get;  set; } = false;
+        public static bool hasToken { get; set; } = false;
         public static string UserName { get; set; } = "";
-         
+        public static TokenModel token { get; set; } = new TokenModel();
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
