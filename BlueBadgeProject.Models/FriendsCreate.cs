@@ -9,9 +9,10 @@ namespace BlueBadgeProject.Models
 {
     public class FriendsCreate
     {
-        [Key]
+        [Required]
         public string MyUserId { get; set; }
         [Required]
         public string FriendUserId { get; set; }
-        
+
     }
+}

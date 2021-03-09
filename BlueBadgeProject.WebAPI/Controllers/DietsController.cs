@@ -15,6 +15,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
     {
         DietService dietService = new DietService();
         [HttpPost]
+        [Route("AddDiet")]
         public IHttpActionResult AddDiet([FromBody] Models.DietCreate model)
         {
             if (model is null)
@@ -39,12 +40,15 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpGet]
+        [Route("GetDietList")]
         public IHttpActionResult GetDietList()
-        {
-         return (IHttpActionResult) dietService.GetAllDiets();
-
+        {        
+            return Ok(dietService.GetAllDiets());
         }
+
+        //User sequence contains no elements
         [HttpGet]
+        [Route("GetAUsersDiet")]
         public IHttpActionResult GetAUsersDiet(string Id)
         {
             if (Id is null)
@@ -55,11 +59,12 @@ namespace BlueBadgeProject.WebAPI.Controllers
             {
                 return (IHttpActionResult)dietService.GetDietByUserId(Id);
             }
-            return BadRequest(ModelState);           
+            return BadRequest(ModelState);
 
         }
         [HttpGet]
-        public IHttpActionResult GetDietByNeeds(DietFind model)
+        [Route("GetDietByNeeds")]
+        public IHttpActionResult GetDietByNeeds([FromBody]DietFind model)
         {
             if (model is null)
             {
@@ -67,11 +72,12 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             if (ModelState.IsValid)
             {
-                return (IHttpActionResult)dietService.GetDietByUserNeeds(model);
+                return Ok(dietService.GetDietByUserNeeds(model));
             }
             return BadRequest(ModelState);
         }
         [HttpPost]
+        [Route("DietEdit")]
         public IHttpActionResult DietEdit(DietEdit model)
         {
             if (model is null)
@@ -90,6 +96,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete]
+        [Route("DietDelete")]
         public IHttpActionResult DietDelete(int Id)
         {
             if (Id == 0)

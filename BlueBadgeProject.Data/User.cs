@@ -59,7 +59,7 @@ namespace BlueBadgeProject.Data
         public bool IsGlutenFree { get; set; } = false;
         [ForeignKey(nameof(Diets))]
         public int? DietId { get; set; }
-        public virtual DietCreate Diets { get; set; } 
+        public virtual Diets Diets { get; set; } 
 
     }
 }

@@ -15,6 +15,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
     {       
         FriendsService friendsService = new FriendsService();
         [HttpPost]
+        [Route("AddYourFriends")]
         public IHttpActionResult AddYourFriends([FromBody] FriendsCreate model)
         {
             if (model is null)
@@ -38,12 +39,14 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpGet]
+        [Route("GetFriendsList")]
         public IHttpActionResult GetFriendsList([FromBody] string Id)
         {
             return (IHttpActionResult)friendsService.GetListOfFriends(Id);
 
         }
         [HttpDelete]
+        [Route("FriendsDelete")]
         public IHttpActionResult FriendsDelete(FriendsDetail model)
         {
             if (model is null)
@@ -61,23 +64,27 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             return BadRequest(ModelState);
         }
-        [HttpGet]
-        public IHttpActionResult ViewFriendsDiets(string friendId)
-        {
-          
-                if (friendId is null)
-                {
-                    return BadRequest("Please enter a valid Friend Id. ");
-                }
-                if (ModelState.IsValid)
-                {
-                DietDetail friendsDiet = friendsService.ViewFriendsDietPlan(friendId);
-                  
-                return Ok(friendsDiet.Name);
-                }
+        //This is a stretch goal that doesnt quite work yet
+        //Get message of "Unable to cast object of type 'System.Data.Entity.Infrastructure.DbQuery`1[BlueBadgeProject.Data.User]' 
+        //to type 'BlueBadgeProject.Data.User'." in the service 
+        //[HttpGet]
+        //[Route("ViewFriendsDiets")]
+        //public IHttpActionResult ViewFriendsDiets(string friendId)
+        //{
 
-            return BadRequest();
-        }
+        //    if (friendId is null)
+        //    {
+        //        return BadRequest("Please enter a valid Friend Id. ");
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        DietDetail friendsDiet = friendsService.ViewFriendsDietPlan(friendId);
+
+        //        return Ok(friendsDiet.Name);
+        //    }
+
+        //    return BadRequest();
+        //}
 
     }
 
