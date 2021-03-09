@@ -68,7 +68,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             if (ModelState.IsValid)
             {
-                return (IHttpActionResult)dietService.GetDietByUserNeeds(model);
+                return Ok(dietService.GetDietByUserNeeds(model));
             }
             return BadRequest(ModelState);
         }
