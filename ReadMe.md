@@ -55,7 +55,118 @@ Owin
 ## Usage
 
 ```bash
-XXXXXXX
+
+API	Description
+POST api/User/Register	
+
+
+GET api/User/GetAll	
+
+
+GET api/User/GetUserInfo?userId={userId}	
+
+
+GET api/User/UserInfo	
+
+
+PUT api/User/Edit	
+
+
+PUT api/User/AdminEdit?UserId={UserId}&FullName={FullName}&Height={Height}&Weight={Weight}&GoalWeight={GoalWeight}&GoalDate={GoalDate}&SubscriberStatus={SubscriberStatus}&WeeklyCaloricNeed={WeeklyCaloricNeed}&BodyType={BodyType}&LifeStyleType={LifeStyleType}&IsVegetarian={IsVegetarian}&IsKeto={IsKeto}&IsLactoseFree={IsLactoseFree}&IsGlutenFree={IsGlutenFree}&DietId={DietId}	
+
+
+DELETE api/User/DeleteUserById?userId={userId}	
+
+
+POST api/User/Logout	
+
+
+GET api/User/ManageInfo?returnUrl={returnUrl}&generateState={generateState}	
+
+
+POST api/User/ChangePassword	
+
+
+POST api/User/SetPassword	
+
+
+POST api/User/AddExternalLogin	
+
+POST api/User/RemoveLogin	
+
+
+GET api/User/ExternalLogin?provider={provider}&error={error}	
+
+
+GET api/User/ExternalLogins?returnUrl={returnUrl}&generateState={generateState}	
+
+
+POST api/User/RegisterExternal	
+
+
+Diets
+API	Description
+GET api/Diets/GetAll	
+
+
+POST api/Diets	
+
+
+GET api/Diets/{Id}	
+
+
+GET api/Diets	
+
+
+PUT api/Diets	
+
+
+DELETE api/Diets/{Id}	
+
+
+Admin
+API	Description
+PUT api/Admin/Register?userId={userId}	
+
+
+GET api/Admin/GetAll	
+
+
+GET api/Admin/IsAdmin?userId={userId}	
+
+
+DELETE api/Admin/RemoveStatus?userId={userId}	
+
+
+Friends
+API	Description
+POST api/Friends	
+
+
+GET api/Friends	
+No documentation available.
+
+DELETE api/Friends	
+
+
+GET api/Friends?friendId={friendId}	
+
+
+WorkoutPlan
+API	Description
+GET api/WorkoutPlan	
+
+
+GET api/WorkoutPlan/{id}	
+
+POST api/WorkoutPlan	
+
+
+PUT api/WorkoutPlan	
+
+
+DELETE api/WorkoutPlan/{id}	
+
 ```
 #Resources
 ```bash
