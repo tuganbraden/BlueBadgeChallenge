@@ -14,19 +14,115 @@ Fitness provide users with an all-in-one application to organize their health in
 - Create your own workout plans or browse our list of workout plans
 - Get diet suggestions based on your personal needs
 
-## Description
-Create User Profile  
-Get User Diet  
-Allow User to create WorkoutPlans  
-Display User WorkoutPlans  
-Display User by Diet type  
-Edit User info  
-Edit Diets  
-Edit WorkoutPlans  
-Use Diets and User goals to determine a workout severity  
-Suggest Diets based on dietary needs  
-Add other User as Friends  
-View Friends Diet plan  
+## API	Description
+FRIENDS
+
+POST api/Friends/AddYourFriends	
+Input your user id and your friends user id - add a friend to your list
+
+GET api/Friends/GetFriendsList	
+Input user id - return list of friends
+
+DELETE api/Friends/FriendsDelete	
+Input your user id and friends user id - delete a friend
+
+USER 
+POST api/User/Register	
+Input user information to register a user
+
+GET api/User/GetAll	
+Log in as admin to view full list of users
+
+GET api/User/GetUserInfo?userId={userId}	
+Input user id while logged in as admin to view a users info
+
+GET api/User/UserInfo	
+Input user email while logged in as admin to view user info
+
+PUT api/User/Edit	
+Input user details while logged in as admin to edit user
+
+DELETE api/User/DeleteUserById	
+Input user ID while logged in as admin to delete a user
+
+POST api/User/Logout	
+logout from admin role
+
+POST api/User/ChangePassword	
+Input old password and new password while logged in as to change password
+
+POST api/User/SetPassword	
+Input new password while logged in to set password
+
+POST api/User/AddExternalLogin	
+Input token to create a new login
+
+POST api/User/RemoveLogin	
+Input login and provider key while logged in as user to remove a login
+
+GET api/User/ExternalLogin?provider={provider}&error={error}	
+No documentation available.
+
+GET api/User/ExternalLogins?returnUrl={returnUrl}&generateState={generateState}	
+No documentation available.
+
+POST api/User/RegisterExternal	
+No documentation available.
+
+DIETS
+
+POST api/Diets/AddDiet	
+Input diet details to create a diet
+
+GET api/Diets/GetDietList	
+Get full list of diets
+
+GET api/Diets/GetAUsersDiet?Id={Id}	
+Get a diet by inputting user id
+
+GET api/Diets/GetDietByNeeds	
+get a diet by inputting needs
+
+POST api/Diets/DietEdit	
+Input diet details to edit a diet
+
+DELETE api/Diets/DietDelete?Id={Id}	
+Input diet id to delete a diet
+
+WOURKOUTPLAN
+
+GET api/WorkoutPlan	
+No documentation available.
+
+GET api/WorkoutPlan/{id}	
+No documentation available.
+
+POST api/WorkoutPlan	
+No documentation available.
+
+PUT api/WorkoutPlan	
+No documentation available.
+
+DELETE api/WorkoutPlan/{id}	
+No documentation available.
+
+VALUES 
+
+API	Description
+GET api/Values	
+No documentation available.
+
+GET api/Values/{id}	
+No documentation available.
+
+POST api/Values	
+No documentation available.
+
+PUT api/Values/{id}	
+No documentation available.
+
+DELETE api/Values/{id}	
+No documentation available.
 
 ## Installation
 
@@ -65,7 +161,6 @@ https://www.medicinenet.com/mediterranean_diet/definition.htm
 https://www.healthline.com/nutrition/ketogenic-diet-101
 https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/dash-diet/art-20047110#:~:text=Dietary%20Approaches%20to%20Stop%20Hypertension,that%20help%20lower%20blood%20pressure.
 https://www.hsph.harvard.edu/nutritionsource/healthy-weight/diet-reviews/paleo-diet/
-https://www.tutorialsteacher.com/webapi/create-web-api-project
 ```
 
 ## Contributing
