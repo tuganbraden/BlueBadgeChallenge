@@ -12,6 +12,7 @@ using Microsoft.Owin.Security.OAuth;
 
 using BlueBadgeProject.Data;
 using BlueBadgeProject.Services;
+using BlueBadgeProject.Data.Migrations;
 
 namespace BlueBadgeProject.WebAPI.Providers
 {
@@ -31,7 +32,7 @@ namespace BlueBadgeProject.WebAPI.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<UserManager>();
+            var userManager = context.OwinContext.GetUserManager<BlueBadgeProject.Data.Migrations.UserManager>();
 
             User user = await userManager.FindAsync(context.UserName, context.Password);
 
@@ -40,7 +41,7 @@ namespace BlueBadgeProject.WebAPI.Providers
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
-
+           
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
@@ -50,6 +51,9 @@ namespace BlueBadgeProject.WebAPI.Providers
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
+         
+            
+
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

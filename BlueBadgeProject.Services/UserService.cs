@@ -12,8 +12,8 @@ namespace BlueBadgeProject.Services
     public class UserService
     {
         private readonly string _userId;
-        private UserManager _userManager;
-        public UserManager UserManager
+        private BlueBadgeProject.Data.Migrations.UserManager _userManager;
+        public BlueBadgeProject.Data.Migrations.UserManager UserManager
         {
             get
             {
@@ -24,7 +24,7 @@ namespace BlueBadgeProject.Services
                 _userManager = value;
             }
         }
-        public UserService(string userId, UserManager userManager)
+        public UserService(string userId, BlueBadgeProject.Data.Migrations.UserManager userManager)
         {
             _userManager = userManager;
             _userId = userId;
@@ -62,7 +62,8 @@ namespace BlueBadgeProject.Services
                     ctx.Users.Select(
                        e => new UserListItem
                        {
-                           UserId = e.UserId,
+                           UserId = e.Id,
+                           UserName = e.UserName,
                            FullName = e.FullName,
                            SubscriberStatus = e.SubscriberStatus,
                            CreatedUtc = e.CreatedUtc
@@ -74,11 +75,11 @@ namespace BlueBadgeProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Users.Single(e => e.UserId == id);
+                var entity = ctx.Users.Single(e => e.Id == id);
                 return
                     new UserDetail
                     {
-                        UserId = entity.UserId,
+                        UserId = entity.Id,
                         FullName = entity.FullName,
                         CreatedUtc = entity.CreatedUtc,
                         Height = entity.Height,
@@ -99,10 +100,38 @@ namespace BlueBadgeProject.Services
         }
         public bool UpdateUser(UserEdit model)
         {
+            if (model.UserId != _userId)
+            {
+                return false;
+            }
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
-                    ctx.Users.Single(e => e.UserId == model.UserId);
+                    ctx.Users.Single(e => e.Id == model.UserId);
+                entity.FullName = model.FullName;
+                entity.Height = model.Height;
+                entity.Weight = model.Weight;
+                entity.GoalWeight = model.GoalWeight;
+                entity.GoalDate = model.GoalDate;
+                entity.SubscriberStatus = model.SubscriberStatus;
+                entity.WeeklyCaloricNeed = model.WeeklyCaloricNeed;
+                entity.BodyType = model.BodyType;
+                entity.LifeStyleType = model.LifeStyleType;
+                entity.IsVegetarian = model.IsVegetarian;
+                entity.IsKeto = model.IsKeto;
+                entity.IsLactoseFree = model.IsLactoseFree;
+                entity.IsGlutenFree = model.IsGlutenFree;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                return ctx.SaveChanges() >= 1;
+
+            }
+        }
+        public bool UpdateUserAdmin(UserEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Users.Single(e => e.Id == model.UserId);
                 entity.FullName = model.FullName;
                 entity.Height = model.Height;
                 entity.Weight = model.Weight;
@@ -125,7 +154,7 @@ namespace BlueBadgeProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Users.Single(e => e.UserId == userId);
+                var entity = ctx.Users.Single(e => e.Id == userId);
                 ctx.Users.Remove(entity);
                 return ctx.SaveChanges() >= 1;
             }

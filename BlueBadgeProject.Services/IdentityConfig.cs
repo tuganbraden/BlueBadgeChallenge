@@ -10,18 +10,18 @@ namespace BlueBadgeProject.Services
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
-    public class UserManager : Microsoft.AspNet.Identity.UserManager<User>
+    public class UserManager : Microsoft.AspNet.Identity.UserManager<User,string>
     {
-        public UserManager(IUserStore<User> store)
+        public UserManager(IUserStore<User,string> store)
             : base(store)
         {
         }
 
         public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
-            var manager = new UserManager(new UserStore<User>(context.Get<ApplicationDbContext>()));
+            var manager = new UserManager(new UserStore<User,AppRole,string,AppUserLogin,ApplicationUserRole,AppUserClaim>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<User>(manager)
+             manager.UserValidator = new UserValidator<User>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
