@@ -1,5 +1,6 @@
 ﻿using BlueBadgeProject.Data;
 using BlueBadgeProject.Models;
+using BlueBadgeProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ public class DietService
     public bool CreateDiet(BlueBadgeProject.Models.DietCreate model)
     {
         var entity =
-            new BlueBadgeProject.Data.DietCreate()
+            new BlueBadgeProject.Data.Diets()
             {
                 Name = model.Name,
                 IsVegetarian = model.IsVegetarian,
@@ -56,6 +57,33 @@ public class DietService
 
     public DietDetail GetDietByUserId(string UserId)
     {
+        var userService = new UserService("3", null);    //TODO: We need to understand these parms so we can fill them correctly
+        UserDetail myUser;
+        myUser = userService.GetUserById(UserId);
+        var DietId = myUser.DietId;
+        using (var ctx1 = new ApplicationDbContext())
+        {
+            var Entity =
+               ctx1
+               .Diets
+               .Single(e => e.DietId == DietId);
+
+            return
+                new DietDetail
+                {
+                    DietId = Entity.DietId,
+                    Name = Entity.Name,
+                    IsVegetarian = Entity.IsVegetarian,
+                    IsKeto = Entity.IsKeto,
+                    IsLactoseFree = Entity.IsLactoseFree,
+                    IsGlutenFree = Entity.IsGlutenFree,
+                    Description = Entity.Description,
+                    CaloriesPerDay = Entity.CaloriesPerDay
+
+                };
+        }
+
+        /*
         using (var ctx = new ApplicationDbContext())
         {
             var myuser =
@@ -84,6 +112,7 @@ public class DietService
 
                 };
         }
+        */
     }
 
 

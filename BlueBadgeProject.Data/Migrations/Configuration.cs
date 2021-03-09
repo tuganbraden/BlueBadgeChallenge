@@ -72,7 +72,7 @@
             }
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            var diets = new DietCreate();
+            var diets = new Diets();
 
             diets.DietId = 1;
             diets.Name = "Mediterranean";
