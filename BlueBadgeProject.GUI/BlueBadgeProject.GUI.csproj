@@ -244,6 +244,7 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\Diets\Index.cshtml" />
     <Content Include="Views\Diets\Create.cshtml" />
+    <Content Include="Views\Diets\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

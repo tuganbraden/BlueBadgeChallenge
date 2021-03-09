@@ -42,7 +42,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         [Route("GetAll")]
         public IHttpActionResult GetDietList()
         {
-         return  Ok(dietService.GetAllDiets());
+            return Ok(dietService.GetAllDiets());
 
         }
         [HttpGet]
@@ -56,7 +56,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             {
                 return Ok(dietService.GetDietByUserId(Id));
             }
-            return BadRequest(ModelState);           
+            return BadRequest(ModelState);
 
         }
         [HttpGet]
@@ -86,8 +86,8 @@ namespace BlueBadgeProject.WebAPI.Controllers
                     return Ok();
                 else
                     return BadRequest("Your diet could not be edited. Please try again. ");
-            }          
-           
+            }
+
             return BadRequest(ModelState);
         }
         [HttpDelete]
@@ -108,7 +108,21 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
             return BadRequest(ModelState);
         }
-        
+        [HttpGet]
+        [Route("GetDietInfo")]
+        public IHttpActionResult GetDietInfo([FromUri] int dietId)
+        {
 
+            try
+            {
+                return Ok(dietService.GetDietById(dietId));
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+
+
+        }
     }
 }

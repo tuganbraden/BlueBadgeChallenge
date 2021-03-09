@@ -78,7 +78,29 @@ namespace BlueBadgeProject.GUI.Controllers
             }
             return View(diet);
         }
-       
-        
+        public ActionResult Details(string id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/Diets/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var responseTask = client.GetAsync("GetDietInfo?dietId=" + id);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                DietDetail model = new DietDetail();
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<DietDetail>();
+                    readTask.Wait();
+                    model = readTask.Result;
+                }
+                return View(model);
+            }
+        }
+
     }
 }

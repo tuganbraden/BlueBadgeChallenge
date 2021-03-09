@@ -53,7 +53,27 @@ public class DietService
             return query.ToList();
         }
     }
+    public DietDetail GetDietById(int id)
+    {
+        using (var ctx = new ApplicationDbContext())
+        {
+            var entity = ctx.Diets.Single(e => e.DietId == id);
+            return
+                new DietDetail
+                {
+                    DietId = entity.DietId,
+                    Name = entity.Name,
+                    IsVegetarian = entity.IsVegetarian,
+                    IsKeto = entity.IsKeto,
+                    IsLactoseFree = entity.IsLactoseFree,
+                    IsGlutenFree = entity.IsGlutenFree,
+                    Description = entity.Description,
+                    CaloriesPerDay = entity.CaloriesPerDay
 
+                };
+        }
+        
+    }
     public DietDetail GetDietByUserId(string UserId)
     {
         using (var ctx = new ApplicationDbContext())
@@ -61,7 +81,7 @@ public class DietService
             var myuser =
                 ctx
                 .Users
-                .Single(e => e.UserId == UserId);
+                .Single(e => e.Id == UserId);
 
             var DietId = myuser.DietId;
 
