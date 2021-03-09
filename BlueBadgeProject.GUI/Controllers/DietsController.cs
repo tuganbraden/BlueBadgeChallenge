@@ -16,7 +16,7 @@ namespace BlueBadgeProject.GUI.Controllers
         // GET: Diets
         public ActionResult Index()
         {
-            
+
             IEnumerable<DietListItem> users = null;
             using (var client = new HttpClient())
             {
@@ -54,14 +54,14 @@ namespace BlueBadgeProject.GUI.Controllers
 
         }
         [HttpPost]
-        
+
         public ActionResult Create(DietCreate diet)
         {
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44387/api/Diets");
-               
+
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -101,6 +101,61 @@ namespace BlueBadgeProject.GUI.Controllers
                 return View(model);
             }
         }
+        public ActionResult Edit(int id)
+        {
+            DietEdit diet = new DietEdit();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/Diets/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var responseTask = client.GetAsync("GetDietInfo?dietId=" + id);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<DietDetail>();
+                    readTask.Wait();
+                    diet.DietId = id;
+                    diet.Description = readTask.Result.Description;
+                    diet.Name = readTask.Result.Name;
+                    diet.CaloriesPerDay = readTask.Result.CaloriesPerDay;
+                    diet.IsVegetarian = readTask.Result.IsVegetarian;
+                    diet.IsKeto = readTask.Result.IsKeto;
+                    diet.IsLactoseFree = readTask.Result.IsLactoseFree;
+                    diet.IsGlutenFree = readTask.Result.IsGlutenFree;
+                    diet.DietId = readTask.Result.DietId;
+
+
+                }
+            }
+            return View(diet);
+
+        }
+        [HttpPost]
+        public ActionResult Edit(DietEdit model)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/Diets/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var puttask = client.PutAsJsonAsync<DietEdit>("Edit", model);
+                puttask.Wait();
+                var result = puttask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(model);
+        }
     }
 }
