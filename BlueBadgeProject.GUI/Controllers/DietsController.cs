@@ -157,5 +157,31 @@ namespace BlueBadgeProject.GUI.Controllers
             }
             return View(model);
         }
+        public ActionResult Delete(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/Diets/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //HTTP DELETE
+                var deleteTask = client.DeleteAsync(id.ToString());
+                deleteTask.Wait();
+
+                var result = deleteTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
