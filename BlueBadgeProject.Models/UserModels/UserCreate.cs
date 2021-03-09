@@ -26,11 +26,16 @@ namespace BlueBadgeProject.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         [Required]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
+        [Display(Name = "Height (in)")]
         public double Height { get; set; }
+        [Display(Name = "Current Weight (lbs)")]
         public double Weight { get; set; }
+        [Display(Name = "Goal Weight (lbs)")]
         public double GoalWeight { get; set; }
         public SubscriberStatus SubscriberStatus { get; set; }
+        [Display(Name = "Weekly Caloric Needs (kCal)")]
         public double WeeklyCaloricNeed { get; set; }
         public BodyType BodyType { get; set; }
        

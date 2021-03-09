@@ -62,6 +62,7 @@ namespace BlueBadgeProject.Services
                     ctx.Users.Select(
                        e => new UserListItem
                        {
+                           UserId = e.Id,
                            UserName = e.UserName,
                            FullName = e.FullName,
                            SubscriberStatus = e.SubscriberStatus,
@@ -98,6 +99,34 @@ namespace BlueBadgeProject.Services
             }
         }
         public bool UpdateUser(UserEdit model)
+        {
+            if (model.UserId != _userId)
+            {
+                return false;
+            }
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Users.Single(e => e.Id == model.UserId);
+                entity.FullName = model.FullName;
+                entity.Height = model.Height;
+                entity.Weight = model.Weight;
+                entity.GoalWeight = model.GoalWeight;
+                entity.GoalDate = model.GoalDate;
+                entity.SubscriberStatus = model.SubscriberStatus;
+                entity.WeeklyCaloricNeed = model.WeeklyCaloricNeed;
+                entity.BodyType = model.BodyType;
+                entity.LifeStyleType = model.LifeStyleType;
+                entity.IsVegetarian = model.IsVegetarian;
+                entity.IsKeto = model.IsKeto;
+                entity.IsLactoseFree = model.IsLactoseFree;
+                entity.IsGlutenFree = model.IsGlutenFree;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                return ctx.SaveChanges() >= 1;
+
+            }
+        }
+        public bool UpdateUserAdmin(UserEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {

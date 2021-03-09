@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(BlueBadgeProject.WebAPI.Startup))]
+[assembly: OwinStartup("ApiConfig",typeof(BlueBadgeProject.WebAPI.Startup))]
 
 namespace BlueBadgeProject.WebAPI
 {

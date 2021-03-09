@@ -67,15 +67,17 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok();
         }
         [HttpGet]
+    
         [Route("GetAll")]
         public IHttpActionResult GetAll()
         {
             var service = CreateUserService();
             return Ok(service.GetUsers());
         }
+        
         [HttpGet]
         [Route("GetUserInfo")]
-        public IHttpActionResult GetUserInfo(string userId)
+        public IHttpActionResult GetUserInfo([FromUri]string userId)
         {
             var service = CreateUserService();
             try
@@ -88,6 +90,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
         }
         [HttpPut]
+        
         [Route("Edit")]
         public IHttpActionResult EditUser([FromBody]UserEdit model)
         {
@@ -106,9 +109,31 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return InternalServerError();
             }
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        [Route("AdminEdit")]
+        public IHttpActionResult EditUserAdmin([FromUri] UserEdit model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var service = CreateUserService();
+            try
+            {
+                if (!service.UpdateUserAdmin(model))
+                    return InternalServerError();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
         [HttpDelete]
         [Route("DeleteUserById")]
-        public IHttpActionResult DeleteUser([FromBody]string userId)
+        //[Authorize(Roles= "Admin")]
+        public IHttpActionResult DeleteUser([FromUri]string userId)
         {
             var service = CreateUserService();
             try
@@ -122,6 +147,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 return InternalServerError();
             }
         }
+        
         #region BuiltInEndpoints
         public UserController(
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
@@ -387,7 +413,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                     {
                         provider = description.AuthenticationType,
                         response_type = "token",
-                        client_id = Startup.PublicClientId,
+                        client_id = "self",
                         redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
                         state = state
                     }),
@@ -526,7 +552,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 };
             }
         }
-        [Authorize(Roles = "Admin")]
+
         private static class RandomOAuthStateGenerator
         {
             private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();

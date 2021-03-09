@@ -15,4 +15,6 @@ namespace BlueBadgeProject.Models
         public string FriendUserId { get; set; }
 
     }
+
 }
+

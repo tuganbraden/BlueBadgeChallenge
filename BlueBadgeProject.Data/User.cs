@@ -45,6 +45,7 @@ namespace BlueBadgeProject.Data
         [Required]
         public SubscriberStatus SubscriberStatus { get; set; } = 0;
         [Required]
+        [Display(Name = "Weekly Caloric Needs (kCal)")]
         public double WeeklyCaloricNeed { get; set; }
         public BodyType BodyType { get; set; }
         [Required]

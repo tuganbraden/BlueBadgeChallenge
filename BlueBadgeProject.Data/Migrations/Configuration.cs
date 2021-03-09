@@ -8,6 +8,11 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using BlueBadgeProject.Data;
+    using Microsoft.Owin.Security;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using Microsoft.Owin.Security.OAuth;
 
     internal sealed class Configuration : DbMigrationsConfiguration<BlueBadgeProject.Data.ApplicationDbContext>
     {
@@ -164,8 +169,24 @@
             return manager;
         }
     }
+    public class ApplicationSignInManager : SignInManager<User, string>
+    {
+        public ApplicationSignInManager(UserManager userManager, IAuthenticationManager authenticationManager)
+            : base(userManager, authenticationManager)
+        {
+            BearerToken = new Dictionary<string, string>();
+        }
+        public Dictionary<string,string> BearerToken { get; set; }
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
+        {
+            return user.GenerateUserIdentityAsync((UserManager)UserManager, OAuthDefaults.AuthenticationType);
+        }
 
-        
+        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        {
+            return new ApplicationSignInManager(context.GetUserManager<UserManager>(), context.Authentication) { BearerToken = new Dictionary<string, string>()};
+        }
+    }
 
 
 
@@ -173,5 +194,7 @@
 
 
 
-    
+
+
+
 }

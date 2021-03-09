@@ -21,7 +21,7 @@ namespace BlueBadgeProject.Services
         {
             var manager = new UserManager(new UserStore<User,AppRole,string,AppUserLogin,ApplicationUserRole,AppUserClaim>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<User>(manager)
+             manager.UserValidator = new UserValidator<User>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
