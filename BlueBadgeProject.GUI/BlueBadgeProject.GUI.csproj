@@ -242,11 +242,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Diets\Index.cshtml" />
+    <Content Include="Views\Diets\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Diets\" />
     <Folder Include="Views\WorkoutPlan\" />
   </ItemGroup>
   <ItemGroup>
