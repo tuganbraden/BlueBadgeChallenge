@@ -8,7 +8,6 @@
 # Fitness
 
 Fitness is a C# program that helps you meet your health needs by suggesting diets and workouts based on your unique input
-Fitness provide users with an all-in-one application to organize their health information and to establish workouts with their personal goals in mind.
 
 ## Features
 - Create your own workout plans or browse our list of workout plans
