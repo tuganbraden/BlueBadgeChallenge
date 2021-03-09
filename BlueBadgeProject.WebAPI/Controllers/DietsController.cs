@@ -24,7 +24,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             if (ModelState.IsValid)
             {
-                
+
                 var created = dietService.CreateDiet(model);
                 if (created == true)
                 {
@@ -34,16 +34,18 @@ namespace BlueBadgeProject.WebAPI.Controllers
                 {
                     return BadRequest("Your diet was not created. Please try again. ");
 
-                }                      
-                        
+                }
+
             }
             return BadRequest(ModelState);
         }
         [HttpGet]
+
         [Route("GetDietList")]
         public IHttpActionResult GetDietList()
         {        
             return Ok(dietService.GetAllDiets());
+
         }
 
         //User sequence contains no elements
@@ -57,7 +59,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             if (ModelState.IsValid)
             {
-                return (IHttpActionResult)dietService.GetDietByUserId(Id);
+                return Ok(dietService.GetDietByUserId(Id));
             }
             return BadRequest(ModelState);
 
@@ -76,8 +78,10 @@ namespace BlueBadgeProject.WebAPI.Controllers
             }
             return BadRequest(ModelState);
         }
+
         [HttpPost]
         [Route("DietEdit")]
+
         public IHttpActionResult DietEdit(DietEdit model)
         {
             if (model is null)

@@ -47,7 +47,7 @@ namespace BlueBadgeProject.Data
     public class ApplicationDbContext : IdentityDbContext<User, AppRole, string, AppUserLogin, ApplicationUserRole, AppUserClaim>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection"
+            : base("DefaultConnection3"
                   )
         {
         }

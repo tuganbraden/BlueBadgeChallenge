@@ -8,7 +8,6 @@
 # Fitness
 
 Fitness is a C# program that helps you meet your health needs by suggesting diets and workouts based on your unique input
-Fitness provide users with an all-in-one application to organize their health information and to establish workouts with their personal goals in mind.
 
 ## Features
 - Create your own workout plans or browse our list of workout plans
@@ -124,6 +123,7 @@ No documentation available.
 DELETE api/Values/{id}	
 No documentation available. 
 
+
 ## Installation
 
 Fitness can be downloaded from Github and run locally 
@@ -161,7 +161,6 @@ https://www.medicinenet.com/mediterranean_diet/definition.htm
 https://www.healthline.com/nutrition/ketogenic-diet-101
 https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/dash-diet/art-20047110#:~:text=Dietary%20Approaches%20to%20Stop%20Hypertension,that%20help%20lower%20blood%20pressure.
 https://www.hsph.harvard.edu/nutritionsource/healthy-weight/diet-reviews/paleo-diet/
-https://www.tutorialsteacher.com/webapi/create-web-api-project
 ```
 
 ## Contributing
