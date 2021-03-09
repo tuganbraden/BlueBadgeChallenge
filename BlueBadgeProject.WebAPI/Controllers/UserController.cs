@@ -67,14 +67,14 @@ namespace BlueBadgeProject.WebAPI.Controllers
             return Ok();
         }
         [HttpGet]
-        [AllowAnonymous]
+    
         [Route("GetAll")]
         public IHttpActionResult GetAll()
         {
             var service = CreateUserService();
             return Ok(service.GetUsers());
         }
-        [AllowAnonymous]
+        
         [HttpGet]
         [Route("GetUserInfo")]
         public IHttpActionResult GetUserInfo([FromUri]string userId)
@@ -90,7 +90,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
 
         }
         [HttpPut]
-        [AllowAnonymous]
+        
         [Route("Edit")]
         public IHttpActionResult EditUser([FromBody]UserEdit model)
         {
@@ -112,7 +112,7 @@ namespace BlueBadgeProject.WebAPI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("AdminEdit")]
-        public IHttpActionResult EditUserAdmin([FromBody] UserEdit model)
+        public IHttpActionResult EditUserAdmin([FromUri] UserEdit model)
         {
             if (!ModelState.IsValid)
             {
@@ -132,8 +132,8 @@ namespace BlueBadgeProject.WebAPI.Controllers
         }
         [HttpDelete]
         [Route("DeleteUserById")]
-        [Authorize(Roles= "Admin")]
-        public IHttpActionResult DeleteUser([FromBody]string userId)
+        //[Authorize(Roles= "Admin")]
+        public IHttpActionResult DeleteUser([FromUri]string userId)
         {
             var service = CreateUserService();
             try

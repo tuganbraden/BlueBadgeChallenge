@@ -1,10 +1,13 @@
-﻿using BlueBadgeProject.GUI.Views;
+﻿using BlueBadgeProject.GUI.Models;
+using BlueBadgeProject.GUI.Views;
 using BlueBadgeProject.Models;
+using BlueBadgeProject.WebAPI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -15,12 +18,18 @@ namespace BlueBadgeProject.GUI.Controllers
     public class UserController : Controller
     {
         // GET: User
+        [WebApiAuthorize]
         public ActionResult Index()
         {
             IEnumerable<UserListItem> users = null;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44387/api/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
                 var responseTask = client.GetAsync("User/GetAll");
                 responseTask.Wait();
 
@@ -40,17 +49,24 @@ namespace BlueBadgeProject.GUI.Controllers
             
             return View(users);
         }
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult create()
         {
-            return View();
+            
+            {
+                return View();
+            }
+            
         }
         [HttpPost]
-        public ActionResult create(UserCreate user)
+        [System.Web.Mvc.AllowAnonymous]
+        public ActionResult Create(UserCreate user)
         {
+            
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44387/api/User/Register");
-
+               
                 var postTask = client.PostAsJsonAsync<UserCreate>(client.BaseAddress, user);
                 postTask.Wait();
                 var result = postTask.Result;
@@ -62,10 +78,28 @@ namespace BlueBadgeProject.GUI.Controllers
             }
             return View(user);
         }
-        public ActionResult detail()
+        public ActionResult Details(string id)
         {
-            
-            return View();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var responseTask = client.GetAsync("GetUserInfo?userId=" + id);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                UserDetail model = new UserDetail();
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<UserDetail>();
+                    readTask.Wait();
+                    model = readTask.Result;
+                }
+                return View(model);
+            }
         }
         public ActionResult Edit(string id)
         {
@@ -73,6 +107,11 @@ namespace BlueBadgeProject.GUI.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
                 var responseTask = client.GetAsync("GetUserInfo?userId=" + id);
                 responseTask.Wait();
                 var result = responseTask.Result;
@@ -101,6 +140,54 @@ namespace BlueBadgeProject.GUI.Controllers
             }
             return View(user);
         }
-        
+        [HttpPost]
+        public ActionResult Edit(UserEdit model)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var puttask = client.PutAsJsonAsync<UserEdit>("Edit",model);
+                puttask.Wait();
+                var result = puttask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(model);
+        }
+        public ActionResult Delete(string id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //HTTP DELETE
+                var deleteTask = client.DeleteAsync("DeleteUserById?userId=" + id);
+                deleteTask.Wait();
+
+                var result = deleteTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

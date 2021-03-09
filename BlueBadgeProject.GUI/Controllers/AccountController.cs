@@ -428,6 +428,7 @@ namespace BlueBadgeProject.GUI.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             Startup.hasToken = false;
             Startup.token = null;
+            Startup.token = new TokenModel();
             
             return RedirectToAction("Index", "Home");
         }

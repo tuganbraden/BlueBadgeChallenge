@@ -60,7 +60,7 @@ namespace BlueBadgeProject.WebAPI
 
                 AuthenticationType = OAuthDefaults.AuthenticationType,
                 
-                LoginPath = new PathString("/Account/Login"),
+               LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.

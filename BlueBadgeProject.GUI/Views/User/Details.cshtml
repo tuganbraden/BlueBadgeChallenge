@@ -1,0 +1,123 @@
+﻿@model BlueBadgeProject.Models.UserDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeeklyCaloricNeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeeklyCaloricNeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVegetarian)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVegetarian)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsKeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsKeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsLactoseFree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsLactoseFree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsGlutenFree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsGlutenFree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DietId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DietId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.UserId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
