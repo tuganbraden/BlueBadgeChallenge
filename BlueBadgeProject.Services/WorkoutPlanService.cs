@@ -10,9 +10,9 @@ namespace BlueBadgeProject.Services
 {
     public class WorkoutPlanService
     {
-        public readonly Guid _userId;
+        public readonly string _userId;
 
-        public WorkoutPlanService(Guid userId)
+        public WorkoutPlanService(string userId)
         {
             _userId = userId;
         }

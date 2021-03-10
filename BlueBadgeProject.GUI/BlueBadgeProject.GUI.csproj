@@ -246,11 +246,14 @@
     <Content Include="Views\Diets\Create.cshtml" />
     <Content Include="Views\Diets\Details.cshtml" />
     <Content Include="Views\Diets\Edit.cshtml" />
+    <Content Include="Views\WorkoutPlan\Index.cshtml" />
+    <Content Include="Views\WorkoutPlan\create.cshtml" />
+    <Content Include="Views\WorkoutPlan\Details.cshtml" />
+    <Content Include="Views\WorkoutPlan\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\WorkoutPlan\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

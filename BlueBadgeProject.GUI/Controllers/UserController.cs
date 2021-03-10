@@ -50,7 +50,7 @@ namespace BlueBadgeProject.GUI.Controllers
             return View(users);
         }
         [System.Web.Mvc.AllowAnonymous]
-        public ActionResult create()
+        public ActionResult Create()
         {
             
             {

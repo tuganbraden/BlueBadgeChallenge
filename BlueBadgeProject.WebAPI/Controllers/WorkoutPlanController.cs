@@ -10,11 +10,13 @@ using System.Web.Http;
 
 namespace BlueBadgeProject.WebAPI.Controllers
 {
+    [Authorize]
     public class WorkoutPlanController : ApiController
     {
+        private const string LocalLoginProvider = "Local";
         private WorkoutPlanService CreateWorkoutPlanService()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
+            var userId = User.Identity.GetUserId();
             var workoutPlanService = new WorkoutPlanService(userId);
             return workoutPlanService;
         }
