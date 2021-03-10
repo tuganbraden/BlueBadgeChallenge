@@ -72,15 +72,17 @@
             }
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            var diets1 = new DietCreate();
 
-            
-            diets1.Name = "Mediterranean";
-            diets1.IsVegetarian = false;
-            diets1.IsKeto = false;
-            diets1.IsLactoseFree = true;
-            diets1.IsGlutenFree = false;
-            diets1.Description = "A diet traditionally followed in Greece, Crete, southern France, and parts of Italy that emphasizes fruits and vegetables, nuts, grains, olive oil (as opposed to butter)"+
+            var diets = new Diets();
+
+            diets.DietId = 1;
+            diets.Name = "Mediterranean";
+            diets.IsVegetarian = false;
+            diets.IsKeto = false;
+            diets.IsLactoseFree = true;
+            diets.IsGlutenFree = false;
+            diets.Description = "A diet traditionally followed in Greece, Crete, southern France, and parts of Italy that emphasizes fruits and vegetables, nuts, grains, olive oil (as opposed to butter)"+
+
                                 "and grilled or steamed chicken and seafood (as opposed to red meat). Plus a glass or two of red wine. High consumption of fruits, vegetables, bread and other cereals, beans, nuts and seeds;"+
                                 "Olive oil is the key monounsaturated fat source; Dairy products, fish and poultry are consumed in low to moderate amounts; Little red meat is eaten; Eggs are eaten zero to four times a week;"+
                                 "and Wine is drunk in moderate(or low) amounts. Many studies indicate that a Mediterranean diet may play an important role in the prevention of coronary artery heart disease.A Mediterranean-style diet"+

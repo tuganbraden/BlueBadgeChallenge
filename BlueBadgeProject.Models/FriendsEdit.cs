@@ -9,7 +9,7 @@ namespace BlueBadgeProject.Models
 {
     class FriendsEdit
     {
-        [Key]
+        [Required]
         public string MyUserId { get; set; }
         [Required]
         public string FriendUserId { get; set; }
