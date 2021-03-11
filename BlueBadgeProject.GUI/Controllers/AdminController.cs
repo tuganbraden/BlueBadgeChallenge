@@ -47,7 +47,7 @@ namespace BlueBadgeProject.GUI.Controllers
         {
 
             IEnumerable<UserListItem> users = null;
-            IEnumerable<UserListItem> nonAdmins = new List<UserListItem>();
+            List<UserListItem> nonAdmins = new List<UserListItem>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44387/api/");
@@ -75,9 +75,9 @@ namespace BlueBadgeProject.GUI.Controllers
                             var isAdminTask = queryResult.Content.ReadAsAsync<bool>();
                             isAdminTask.Wait();
 
-                            if (isAdminTask.Result)
+                            if (!isAdminTask.Result)
                             {
-                                nonAdmins.Append(user);
+                                nonAdmins.Add(user);
                             }
                         }
                     }
@@ -85,7 +85,7 @@ namespace BlueBadgeProject.GUI.Controllers
                 else
                 {
                     users = Enumerable.Empty<UserListItem>();
-                    nonAdmins = Enumerable.Empty<UserListItem>();
+                    //nonAdmins = Enumerable.Empty<UserListItem>();
                 }
             }
 
