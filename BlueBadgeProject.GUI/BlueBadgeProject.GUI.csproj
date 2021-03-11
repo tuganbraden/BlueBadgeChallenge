@@ -250,10 +250,11 @@
     <Content Include="Views\WorkoutPlan\create.cshtml" />
     <Content Include="Views\WorkoutPlan\Details.cshtml" />
     <Content Include="Views\WorkoutPlan\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\MakeAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
