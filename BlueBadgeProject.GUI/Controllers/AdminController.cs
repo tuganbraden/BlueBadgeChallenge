@@ -43,6 +43,7 @@ namespace BlueBadgeProject.GUI.Controllers
 
             return View(admins);
         }
+        [HttpGet]
         public ActionResult MakeAdmin()
         {
 
@@ -91,6 +92,27 @@ namespace BlueBadgeProject.GUI.Controllers
 
             return View(nonAdmins);
         }
+        //[HttpPut]
+        //public ActionResult MakeAdmin(string id) {
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri("https://localhost:44387/api/Admin");
+
+        //        client.DefaultRequestHeaders.Clear();
+        //        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
+
+        //        client.DefaultRequestHeaders.Accept.Add(
+        //            new MediaTypeWithQualityHeaderValue("application/json"));
+        //        var postTask = client.PostAsJsonAsync<string>(client.BaseAddress, id);
+        //        postTask.Wait();
+        //        var result = postTask.Result;
+        //        if (result.IsSuccessStatusCode)
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
+
+        //    }
+        //}
 
     }
 }
