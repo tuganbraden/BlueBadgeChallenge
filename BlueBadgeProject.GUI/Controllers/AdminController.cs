@@ -96,7 +96,7 @@ namespace BlueBadgeProject.GUI.Controllers
         //public ActionResult MakeAdmin(string id) {
         //    using (var client = new HttpClient())
         //    {
-        //        client.BaseAddress = new Uri("https://localhost:44387/api/Admin");
+        //        client.BaseAddress = new Uri("http://fitnesswebapi.azurewebsites.net/api/Admin");
 
         //        client.DefaultRequestHeaders.Clear();
         //        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);

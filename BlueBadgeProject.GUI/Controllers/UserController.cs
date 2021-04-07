@@ -24,7 +24,7 @@ namespace BlueBadgeProject.GUI.Controllers
             IEnumerable<UserListItem> users = null;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -65,7 +65,7 @@ namespace BlueBadgeProject.GUI.Controllers
             
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/User/Register");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/User/Register");
                
                 var postTask = client.PostAsJsonAsync<UserCreate>(client.BaseAddress, user);
                 postTask.Wait();
@@ -82,7 +82,7 @@ namespace BlueBadgeProject.GUI.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/User/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -106,7 +106,7 @@ namespace BlueBadgeProject.GUI.Controllers
             UserEdit user = new UserEdit();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/User/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -145,7 +145,7 @@ namespace BlueBadgeProject.GUI.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/User/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -166,7 +166,7 @@ namespace BlueBadgeProject.GUI.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/User/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/User/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 

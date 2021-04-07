@@ -88,7 +88,7 @@ namespace BlueBadgeProject.GUI.Controllers
             //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/");
+                client.BaseAddress = new Uri("http://fitnesswebapi.azurewebsites.net/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));

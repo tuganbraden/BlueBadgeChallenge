@@ -18,7 +18,7 @@ namespace BlueBadgeProject.GUI.Controllers
             IEnumerable<WorkoutPlanListItem> workouts = null;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -80,7 +80,7 @@ namespace BlueBadgeProject.GUI.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/WorkoutPlan/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/WorkoutPlan/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 
@@ -132,7 +132,7 @@ namespace BlueBadgeProject.GUI.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44387/api/WorkoutPlan/");
+                client.BaseAddress = new Uri("https://fitnesswebapi.azurewebsites.net/api/WorkoutPlan/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Startup.token.AccessToken);
 

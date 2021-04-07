@@ -191,6 +191,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
+    <None Include="Properties\PublishProfiles\FitnessMVC - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\FitnessMVC - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\FitnessMVC - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
